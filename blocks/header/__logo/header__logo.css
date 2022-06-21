@@ -1,0 +1,8 @@
+.header__logo {
+  background-image: url(../../../images/icons/logo-correct.svg);
+  max-width: 142px;
+  height: 33px;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100%;
+}

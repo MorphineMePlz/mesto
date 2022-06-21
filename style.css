@@ -1,30 +1,87 @@
-.page {
-  font-family: "Inter", Arial, sans-serif;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
-  background-color: #000000;
-  background-size: 100% 100%;
-  color: white;
-  margin: 0 auto;
-  max-width: 100%;
-}
-
-.header {
+.profile {
   max-width: 880px;
-  min-height: 74px;
-  padding: 45px 0 0 0;
+  min-height: 120px;
   margin: 0 auto;
+  padding-top: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.header__logo {
-  background-image: url(./images/icons/header-logo.svg);
-  max-width: 142px;
-  height: 33px;
+.profile__container {
+  max-width: 880px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.profile__image {
+  background-image: url(./images/avatar/avatar.jpg);
+  border-radius: 50%;
+  max-width: 120px;
+  height: 120px;
   background-repeat: no-repeat;
-  background-position: top;
   background-size: 100%;
+  background-color: #000000;
+  object-fit: contain;
+  margin-right: 30px;
+}
+
+.profile__info-container {
+  display: flex;
+  max-width: 336px;
+  min-height: 73px;
+  align-items: center;
+  text-overflow: ellipsis;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.profile__button-edit {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #ffffff;
+  background-color: #000000;
+  background-image: url(./images/icons/edit.svg);
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+  background-position: center;
+  padding: 7px;
+  margin-top: 10px;
+  margin-left: 18px;
+  box-sizing: border-box;
+}
+
+.profile__title {
+  max-width: 294px;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  margin: 0;
+  padding: 0;
+}
+
+.profile__profession {
+  max-width: 336px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+
+.profile__button-plus {
+  box-sizing: border-box;
+  max-width: 150px;
+  height: 50px;
+  background-image: url(./images/icons/plus.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 22px 22px;
+  padding: 14px 64px;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  object-fit: cover;
+  align-items: flex-start;
+  transition: 0.2s;
 }

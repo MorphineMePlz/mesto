@@ -1,0 +1,7 @@
+@import url(../fonts/inter_web/inter.css);
+@import url(../vendor/normalize.css);
+@import url(../blocks/page/page.css);
+
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+@import url(../blocks/button/button.css);
