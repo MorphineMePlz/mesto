@@ -9,3 +9,11 @@
   object-fit: contain;
   margin-right: 30px;
 }
+
+@media screen and (max-width: 320px) {
+  .profile__image {
+    align-items: center;
+    margin-right: 0;
+    margin-bottom: 22px;
+  }
+}

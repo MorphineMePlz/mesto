@@ -12,3 +12,13 @@
   margin-left: 18px;
   box-sizing: border-box;
 }
+
+@media screen and (max-width: 320px) {
+  .profile__button-edit {
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px 7.5px;
+    margin-left: 15px;
+    margin-top: 4px;
+  }
+}
