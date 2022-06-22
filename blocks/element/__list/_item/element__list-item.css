@@ -1,0 +1,8 @@
+.element__list-item {
+  width: 282px;
+  list-style: none;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}

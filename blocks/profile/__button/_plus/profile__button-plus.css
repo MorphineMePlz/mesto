@@ -1,0 +1,15 @@
+.profile__button-plus {
+  box-sizing: border-box;
+  max-width: 150px;
+  height: 50px;
+  background-image: url(../../../../images/icons/plus.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 22px 22px;
+  padding: 14px 64px;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  object-fit: cover;
+  align-items: flex-start;
+  transition: 0.2s;
+}

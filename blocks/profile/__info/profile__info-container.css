@@ -1,0 +1,10 @@
+.profile__info-container {
+  display: flex;
+  max-width: 336px;
+  min-height: 73px;
+  align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
