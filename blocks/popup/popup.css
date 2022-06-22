@@ -8,14 +8,10 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
-  display: flex;
   justify-content: center;
   align-items: center;
-  display: none;
-}
-
-.popup.active {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  visibility: hidden;
+  transition: visibility 0.1s, opacity 0.1s linear;
+  opacity: 0;
 }

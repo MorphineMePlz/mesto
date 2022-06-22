@@ -16,7 +16,7 @@
 
 @media screen and (max-width: 810px) {
   .profile {
-    max-width: 650px;
+    max-width: 90%;
   }
 }
 
@@ -24,13 +24,15 @@
   .profile {
     max-width: 480px;
     flex-direction: column;
-    padding: 42px 19px 36px 19px;
+    padding: 42px 19px 0;
     justify-content: center;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 450px) {
   .profile {
-    max-width: 282px;
+    margin: 0 auto;
+    max-width: 90%;
+    padding: 42px 0 0;
   }
 }

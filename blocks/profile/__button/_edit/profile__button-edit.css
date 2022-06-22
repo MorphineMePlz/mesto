@@ -8,7 +8,7 @@
   background-size: 10px 10px;
   background-position: center;
   padding: 7px;
-  margin-top: 10px;
+  align-self: center;
   margin-left: 18px;
   box-sizing: border-box;
 }
@@ -19,6 +19,5 @@
     height: 18px;
     background-size: 7.5px 7.5px;
     margin-left: 15px;
-    margin-top: 4px;
   }
 }

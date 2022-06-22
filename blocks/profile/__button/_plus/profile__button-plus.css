@@ -1,12 +1,11 @@
 .profile__button-plus {
   box-sizing: border-box;
   max-width: 150px;
-  height: 50px;
   background-image: url(../../../../images/icons/plus.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 22px 22px;
-  padding: 14px 64px;
+  padding: 25px 75px;
   border: 2px solid #ffffff;
   border-radius: 2px;
   object-fit: cover;
@@ -14,18 +13,12 @@
   transition: 0.2s;
 }
 
-/* @media screen and (max-width: 680px) {
-  .profile {
-    max-width: 480px;
-    flex-direction: column;
-  }
-} */
-
 @media screen and (max-width: 680px) {
   .profile__button-plus {
-    margin: 36px 18px;
-    width: 282px;
-    height: 50px;
-    padding: 17px 132px 17px 134px;
+    margin: 36px 0;
+    max-width: 100%;
+    width: 100%;
+    padding: 25px 0;
+    background-size: 16px 16px;
   }
 }

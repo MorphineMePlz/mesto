@@ -2,16 +2,18 @@
   display: flex;
   max-width: 336px;
   min-height: 73px;
-  align-items: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   flex-wrap: wrap;
   justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
   .profile__info-container {
     max-width: 282px;
     justify-content: center;
+    align-items: center;
   }
 }

@@ -1,4 +1,4 @@
-.element__list-item {
+.gallery__list-item {
   width: 282px;
   list-style: none;
   background-color: white;
@@ -8,19 +8,15 @@
 }
 
 @media screen and (max-width: 980px) {
-  .element__list-item {
-    margin-right: 50px;
-  }
-}
-
-@media screen and (max-width: 690px) {
-  .element__list-item {
-    margin-right: 10px;
+  .gallery__list-item {
+    width: 100%;
+    margin: 0;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .element__list-item {
+  .gallery__list-item {
     margin-right: 0;
+    max-width: 282px;
   }
 }
