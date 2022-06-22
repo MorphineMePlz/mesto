@@ -4,6 +4,12 @@
   max-width: 880px;
 }
 
+@media screen and (max-width: 980px) {
+  .element {
+    max-width: 760px;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .element {
     max-width: 320px;

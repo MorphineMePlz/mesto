@@ -6,3 +6,15 @@
   margin: 0 auto;
   padding: 0;
 }
+
+@media screen and (max-width: 980px) {
+  .element__list {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .element__list {
+    justify-content: space-between;
+  }
+}

@@ -12,26 +12,26 @@ closePopUp.addEventListener("click", () => {
   popUp.classList.remove("active");
 });
 
-//Отправка формы//
+// //Отправка формы//
 
-const popUpForm = document.querySelector("popup__form");
+// // const popUpForm = document.querySelector("popup__form");
 
-const inputName = document.querySelector(".popup__input-name");
-const inputProf = document.querySelector(".popup__input-prof");
+// // const inputName = document.querySelector(".popup__input-name");
+// // const inputProf = document.querySelector(".popup__input-prof");
 
-function formSubmitHandler(evt) {
-  evt.preventDefault();
-}
+// // function formSubmitHandler(evt) {
+// //   evt.preventDefault();
+// // }
 
-const profileName = document.querySelector(".profile__title");
-const profileProf = document.querySelector(".profile__profession");
-const nameText = inputName.value;
-const profText = inputProf.value;
-inputName.addEventListener("input", () => {
-  profileName.textContent = inputName.value;
-});
+// // const profileName = document.querySelector(".profile__title");
+// // const profileProf = document.querySelector(".profile__profession");
+// // const nameText = inputName.value;
+// // const profText = inputProf.value;
+// // inputName.addEventListener("input", () => {
+// //   profileName.textContent = inputName.value;
+// // });
 
-inputProf.addEventListener("input", () => {
-  profileProf.textContent = inputProf.value;
-});
-// popUpForm.addEventListener("submit", formSubmitHandler);
+// // inputProf.addEventListener("input", () => {
+// //   profileProf.textContent = inputProf.value;
+// });
+// // popUpForm.addEventListener("submit", formSubmitHandler);

@@ -14,7 +14,14 @@
   transition: 0.2s;
 }
 
-@media screen and (max-width: 320px) {
+/* @media screen and (max-width: 680px) {
+  .profile {
+    max-width: 480px;
+    flex-direction: column;
+  }
+} */
+
+@media screen and (max-width: 680px) {
   .profile__button-plus {
     margin: 36px 18px;
     width: 282px;

@@ -5,9 +5,29 @@
   border-bottom: 1px solid #545454;
 }
 
+@media screen and (max-width: 980px) {
+  .header {
+    max-width: 760px;
+    padding: 28px 0 31px 0px;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .header {
+    max-width: 650px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .header {
+    max-width: 480px;
+    padding-left: 27px;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .header {
     max-width: 320px;
-    padding: 28px 0 31px 27px;
+    padding-left: 27px;
   }
 }

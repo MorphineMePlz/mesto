@@ -8,11 +8,29 @@
   align-items: center;
 }
 
+@media screen and (max-width: 980px) {
+  .profile {
+    max-width: 760px;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .profile {
+    max-width: 650px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .profile {
+    max-width: 480px;
+    flex-direction: column;
+    padding: 42px 19px 36px 19px;
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .profile {
     max-width: 282px;
-    padding: 42px 19px 36px 19px;
-    justify-content: center;
-    flex-direction: column;
   }
 }

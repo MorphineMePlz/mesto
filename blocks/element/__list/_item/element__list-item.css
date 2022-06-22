@@ -6,3 +6,21 @@
   overflow: hidden;
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 980px) {
+  .element__list-item {
+    margin-right: 50px;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .element__list-item {
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .element__list-item {
+    margin-right: 0;
+  }
+}
