@@ -1,7 +1,7 @@
-.profile__button-plus {
+.button__plus {
   box-sizing: border-box;
   max-width: 150px;
-  background-image: url(../../../../images/icons/plus.svg);
+  background-image: url(../../../images/icons/plus.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 22px 22px;
@@ -11,14 +11,22 @@
   object-fit: cover;
   align-items: flex-start;
   transition: 0.2s;
+  background-color: unset;
 }
 
 @media screen and (max-width: 680px) {
-  .profile__button-plus {
+  .button__plus {
     margin: 36px 0;
     max-width: 100%;
     width: 100%;
     padding: 25px 0;
     background-size: 16px 16px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .button__plus {
+    max-width: 100%;
+    width: 100%;
   }
 }
