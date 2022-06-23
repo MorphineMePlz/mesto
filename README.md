@@ -12,7 +12,7 @@
 3. Адаптивная верстка
 4. Методолгия - БЭМ
 5. JavaScript
-6. [Ссылка на сайт]()
+6. [Ссылка на сайт](https://morphinemeplz.github.io/mesto/)
 
 ## 2. Figma
 
