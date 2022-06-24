@@ -4,9 +4,9 @@ const inputName = popupForm.querySelector(".popup__input-name");
 const inputProf = popupForm.querySelector(".popup__input-prof");
 const profileName = document.querySelector(".profile__title");
 const profileProf = document.querySelector(".profile__profession");
-const openPopup = document.querySelector(".button__edit");
-const closePopup = popup.querySelector(".button__close");
-const likeBtn = document.querySelector(".button__like");
+const openPopup = document.querySelector(".profile__edit-button");
+const closePopup = popup.querySelector(".popup__close-button");
+const likeBtn = document.querySelector(".gallery__like-button");
 
 openPopup.addEventListener("click", () => {
   inputName.setAttribute("value", profileName.textContent);
@@ -30,5 +30,5 @@ popupForm.addEventListener("submit", formSubmitHandler);
 closePopup.addEventListener("click", popupCloseHandler);
 
 likeBtn.addEventListener("click", () => {
-  likeBtn.classList.toggle("button__like_active");
+  likeBtn.classList.toggle("gallery__like-button_active");
 });

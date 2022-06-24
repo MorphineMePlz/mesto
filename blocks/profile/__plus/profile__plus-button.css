@@ -1,4 +1,4 @@
-.button__plus {
+.profile__plus-button {
   box-sizing: border-box;
   max-width: 150px;
   background-image: url(../../../images/icons/plus.svg);
@@ -14,8 +14,13 @@
   background-color: unset;
 }
 
+.profile__plus-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 680px) {
-  .button__plus {
+  .profile__plus-button {
     margin: 36px 0;
     max-width: 100%;
     width: 100%;
@@ -25,7 +30,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  .button__plus {
+  .profile__plus-button {
     max-width: 100%;
     width: 100%;
   }
