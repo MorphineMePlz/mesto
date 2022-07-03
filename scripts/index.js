@@ -1,3 +1,5 @@
+// Change popup
+
 const popup = document.querySelector(".popup");
 const popupForm = popup.querySelector(".popup__form");
 const inputName = popupForm.querySelector(".popup__input_type_name");
@@ -7,11 +9,18 @@ const profileProf = document.querySelector(".profile__profession");
 const openPopup = document.querySelector(".profile__edit-button");
 const closePopup = popup.querySelector(".popup__close-button");
 
+// Place popup
+
 const popupPlace = document.querySelector(".popup_new-place");
 const inputPlace = document.querySelector(".popup__input_type_place");
 const inputLink = document.querySelector(".popup__input_type_link");
 const openPlacePopupBtn = document.querySelector(".profile__plus-button");
 const closePlacePopupBtn = popupPlace.querySelector(".popup__close-button");
+const popupPlaceForm = popupPlace.querySelector(".popup__form");
+const inputePlaceName = popupPlaceForm.querySelector(
+  ".popup__input_type_place"
+);
+const inputePlaceLink = popupPlaceForm.querySelector(".popup__input_type_link");
 
 const galleryList = document.querySelector(".gallery__list");
 
@@ -60,7 +69,7 @@ const createGalleryElement = (card) => {
   });
 
   deleteBtn.addEventListener("click", () => {
-    console.log("delete");
+    // console.log("delete");
   });
 
   galleryList.prepend(galleryElement);
@@ -82,10 +91,26 @@ function formSubmitHandler(event) {
   popupCloseHandler();
 }
 
+function newPlacePopupCloseHander() {
+  popupPlace.classList.remove("popup_active");
+}
+
+function formSubmitPlaceHandler(event) {
+  event.preventDefault();
+  const card = {
+    name: inputePlaceName.value,
+    link: inputePlaceLink.value,
+  };
+  createGalleryElement(card);
+  newPlacePopupCloseHander();
+}
+
 // Event Listeners
 
 popupForm.addEventListener("submit", formSubmitHandler);
+popupPlaceForm.addEventListener("submit", formSubmitPlaceHandler);
 closePopup.addEventListener("click", popupCloseHandler);
+closePlacePopupBtn.addEventListener("click", newPlacePopupCloseHander);
 
 openPopup.addEventListener("click", () => {
   inputName.value = profileName.textContent;
@@ -94,9 +119,7 @@ openPopup.addEventListener("click", () => {
 });
 
 openPlacePopupBtn.addEventListener("click", () => {
+  inputePlaceName.value = "";
+  inputePlaceLink.value = "";
   popupPlace.classList.add("popup_active");
-});
-
-closePlacePopupBtn.addEventListener("click", () => {
-  popupPlace.classList.remove("popup_active");
 });
