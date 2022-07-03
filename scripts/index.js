@@ -9,7 +9,6 @@ const closePopup = popup.querySelector(".popup__close-button");
 const galleryList = document.querySelector(".gallery__list");
 
 const galleryTemplate = document.querySelector(".gallery__template").content;
-
 const initialCards = [
   {
     name: "Архыз",
@@ -37,20 +36,32 @@ const initialCards = [
   },
 ];
 
-const createGalleryElement = () => {
+const createGalleryElement = (card) => {
   const galleryElement = galleryTemplate
     .querySelector(".gallery__list-item")
     .cloneNode(true);
 
-  galleryElement.querySelector(".gallery__image").src = initialCards[0].link;
-  galleryElement.querySelector(".gallery__image").alt = initialCards[0].name;
-  galleryElement.querySelector(".gallery__title").textContent =
-    initialCards[0].name;
+  galleryElement.querySelector(".gallery__image").src = card.link;
+  galleryElement.querySelector(".gallery__image").alt = card.name;
+  galleryElement.querySelector(".gallery__title").textContent = card.name;
+
+  const likeBtn = galleryElement.querySelector(".gallery__like-button");
+  const deleteBtn = galleryElement.querySelector(".gallery__delete-button");
+
+  likeBtn.addEventListener("click", () => {
+    likeBtn.classList.toggle("gallery__like-button_active");
+  });
+
+  deleteBtn.addEventListener("click", () => {
+    console.log("delete");
+  });
 
   galleryList.prepend(galleryElement);
 };
 
-createGalleryElement();
+initialCards.forEach((card) => {
+  createGalleryElement(card);
+});
 
 openPopup.addEventListener("click", () => {
   inputName.value = profileName.textContent;
