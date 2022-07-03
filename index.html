@@ -20,7 +20,6 @@
               alt="Жак-Ив Кусто"
               class="profile__image"
             />
-
             <div class="profile__info-container">
               <div class="profile__box">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -32,74 +31,7 @@
           <button type="button" class="profile__plus-button"></button>
         </section>
         <section class="gallery">
-          <ul class="gallery__list">
-            <li class="gallery__list-item">
-              <img
-                src="./images/gallery/karach.jpg"
-                alt="Карачаевск"
-                class="gallery__image"
-              />
-              <div class="gallery__content">
-                <h2 class="gallery__title">Карачаевск</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
-            </li>
-            <li class="gallery__list-item">
-              <img
-                src="./images/gallery/elb.png"
-                alt="Гора Эльбрус"
-                class="gallery__image"
-              />
-              <div class="gallery__content">
-                <h2 class="gallery__title">Гора Эльбрус</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
-            </li>
-            <li class="gallery__list-item">
-              <img
-                src="./images/gallery/domb.png"
-                alt="Домбай"
-                class="gallery__image"
-              />
-              <div class="gallery__content">
-                <h2 class="gallery__title">Домбай</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
-            </li>
-            <li class="gallery__list-item">
-              <img
-                src="./images/gallery/almaty2.jpg"
-                alt="Алматы"
-                class="gallery__image"
-              />
-              <div class="gallery__content">
-                <h2 class="gallery__title">Алматы</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
-            </li>
-            <li class="gallery__list-item">
-              <img
-                src="./images/gallery/london2.jpg"
-                alt="Лондон"
-                class="gallery__image"
-              />
-              <div class="gallery__content">
-                <h2 class="gallery__title">Лондон</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
-            </li>
-            <li class="gallery__list-item">
-              <img
-                src="./images/gallery/tel-avivo.jpg"
-                alt="Тель-Авив"
-                class="gallery__image"
-              />
-              <div class="gallery__content">
-                <h2 class="gallery__title">Тель-Авив</h2>
-                <button type="button" class="gallery__like-button"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="gallery__list"></ul>
         </section>
       </main>
       <footer class="footer">
@@ -117,6 +49,17 @@
         </form>
       </div>
     </div>
+
+    <template class="gallery__template">
+      <li class="gallery__list-item">
+        <button class="gallery__delete-button"></button>
+        <img src="" alt="" class="gallery__image" />
+        <div class="gallery__content">
+          <h2 class="gallery__title"></h2>
+          <button type="button" class="gallery__like-button"></button>
+        </div>
+      </li>
+    </template>
 
     <script src="./scripts/index.js"></script>
   </body>
