@@ -38,15 +38,44 @@
         <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
       </footer>
       <div class="popup">
-        <form name="formChange" class="popup__form">
+        <div class="popup__container">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input type="text" class="popup__input popup__input_type_name" />
-          <input type="text" class="popup__input popup__input_type_prof" />
-          <button type="submit" class="popup__submit-button" value="Сохранить">
-            Сохранить
-          </button>
+          <form name="changeProfile" class="popup__form">
+            <input
+              type="text"
+              class="popup__input popup__input_type_name"
+              placeholder="Имя"
+            />
+            <input
+              type="text"
+              class="popup__input popup__input_type_prof"
+              placeholder="Профессия"
+            />
+            <button type="submit" class="popup__submit-button">
+              Сохранить
+            </button>
+          </form>
           <button type="button" class="popup__close-button"></button>
-        </form>
+        </div>
+      </div>
+      <div class="popup popup_new-place">
+        <div class="popup__container">
+          <h2 class="popup__title">Новое место</h2>
+          <form name="createPlace" class="popup__form">
+            <input
+              type="text"
+              class="popup__input popup__input_type_place"
+              placeholder="Название"
+            />
+            <input
+              type="text"
+              class="popup__input popup__input_type_link"
+              placeholder="Ссылка на картинку"
+            />
+            <button type="submit" class="popup__submit-button">Добавить</button>
+          </form>
+          <button type="button" class="popup__close-button"></button>
+        </div>
       </div>
     </div>
 

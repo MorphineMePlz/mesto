@@ -6,6 +6,13 @@ const profileName = document.querySelector(".profile__title");
 const profileProf = document.querySelector(".profile__profession");
 const openPopup = document.querySelector(".profile__edit-button");
 const closePopup = popup.querySelector(".popup__close-button");
+
+const popupPlace = document.querySelector(".popup_new-place");
+const inputPlace = document.querySelector(".popup__input_type_place");
+const inputLink = document.querySelector(".popup__input_type_link");
+const openPlacePopupBtn = document.querySelector(".profile__plus-button");
+const closePlacePopupBtn = popupPlace.querySelector(".popup__close-button");
+
 const galleryList = document.querySelector(".gallery__list");
 
 const galleryTemplate = document.querySelector(".gallery__template").content;
@@ -63,12 +70,6 @@ initialCards.forEach((card) => {
   createGalleryElement(card);
 });
 
-openPopup.addEventListener("click", () => {
-  inputName.value = profileName.textContent;
-  inputProf.value = profileProf.textContent;
-  popup.classList.add("popup_active");
-});
-
 function popupCloseHandler() {
   popup.classList.remove("popup_active");
 }
@@ -81,5 +82,21 @@ function formSubmitHandler(event) {
   popupCloseHandler();
 }
 
+// Event Listeners
+
 popupForm.addEventListener("submit", formSubmitHandler);
 closePopup.addEventListener("click", popupCloseHandler);
+
+openPopup.addEventListener("click", () => {
+  inputName.value = profileName.textContent;
+  inputProf.value = profileProf.textContent;
+  popup.classList.add("popup_active");
+});
+
+openPlacePopupBtn.addEventListener("click", () => {
+  popupPlace.classList.add("popup_active");
+});
+
+closePlacePopupBtn.addEventListener("click", () => {
+  popupPlace.classList.remove("popup_active");
+});
