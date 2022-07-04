@@ -73,20 +73,35 @@ const createGalleryElement = (card) => {
   likeBtn.addEventListener("click", () => {
     likeBtn.classList.toggle("gallery__like-button_active");
   });
+  galleryList.prepend(galleryElement);
 
   deleteBtn.addEventListener("click", () => {
     galleryElement.remove();
   });
 
-  galleryList.prepend(galleryElement);
-  galleryElement.addEventListener("click", () => {
-    popupZoom.classList.add("popup_active");
-  });
+  galleryElement
+    .querySelector(".gallery__image")
+    .addEventListener("click", () => {
+      popupZoom.classList.add("popup_active");
+      popupZoomImage.src = card.link;
+      popupZoomImage.alt = card.name;
+      popupZoomTitle.textContent = card.name;
+    });
 };
 
 initialCards.forEach((card) => {
   createGalleryElement(card);
 });
+
+// initialCards.forEach((card) => {
+//   zoomImage(card);
+// });
+
+// function zoomImage(card) {
+//   popupZoomImage.src = card.link;
+//   popupZoomImage.alt = card.name;
+//   popupZoomTitle.textContent = card.name;
+// }
 
 function popupCloseHandler() {
   popup.classList.remove("popup_active");
