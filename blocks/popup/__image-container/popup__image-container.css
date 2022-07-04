@@ -3,12 +3,12 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  height: 75vh;
+  max-width: 75vw;
 }
 
-/* @media screen and (max-width: 480px) {
+@media screen and (max-width: 450px) {
   .popup__image-container {
-    max-width: 282px;
-    padding: 0;
-    margin: auto 19px;
+    height: 43vh;
   }
-} */
+}

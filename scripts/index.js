@@ -93,16 +93,6 @@ initialCards.forEach((card) => {
   createGalleryElement(card);
 });
 
-// initialCards.forEach((card) => {
-//   zoomImage(card);
-// });
-
-// function zoomImage(card) {
-//   popupZoomImage.src = card.link;
-//   popupZoomImage.alt = card.name;
-//   popupZoomTitle.textContent = card.name;
-// }
-
 function popupCloseHandler() {
   popup.classList.remove("popup_active");
 }
