@@ -1,0 +1,16 @@
+.popup__image-container {
+  margin: auto;
+  max-width: 75vw;
+  max-height: 75vw;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* @media screen and (max-width: 480px) {
+  .popup__image-container {
+    max-width: 282px;
+    padding: 0;
+    margin: auto 19px;
+  }
+} */

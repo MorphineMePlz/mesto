@@ -20,10 +20,16 @@ const popupPlaceForm = popupPlace.querySelector(".popup__form");
 const inputePlaceName = popupPlaceForm.querySelector(
   ".popup__input_type_place"
 );
+
+// Zoom popup
+
+const popupZoom = document.querySelector(".popup_image");
+const closeZoomImageBtn = popupZoom.querySelector(".popup__close-button");
+const popupZoomImage = popupZoom.querySelector(".popup__image-place");
+const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
+
 const inputePlaceLink = popupPlaceForm.querySelector(".popup__input_type_link");
-
 const galleryList = document.querySelector(".gallery__list");
-
 const galleryTemplate = document.querySelector(".gallery__template").content;
 const initialCards = [
   {
@@ -70,11 +76,12 @@ const createGalleryElement = (card) => {
 
   deleteBtn.addEventListener("click", () => {
     galleryElement.remove();
-
-    // console.log("delete");
   });
 
   galleryList.prepend(galleryElement);
+  galleryElement.addEventListener("click", () => {
+    popupZoom.classList.add("popup_active");
+  });
 };
 
 initialCards.forEach((card) => {
@@ -97,6 +104,10 @@ function newPlacePopupCloseHander() {
   popupPlace.classList.remove("popup_active");
 }
 
+function zoomImagePopupCloseHandler() {
+  popupZoom.classList.remove("popup_active");
+}
+
 function formSubmitPlaceHandler(event) {
   event.preventDefault();
   const card = {
@@ -113,6 +124,7 @@ popupForm.addEventListener("submit", formSubmitHandler);
 popupPlaceForm.addEventListener("submit", formSubmitPlaceHandler);
 closePopup.addEventListener("click", popupCloseHandler);
 closePlacePopupBtn.addEventListener("click", newPlacePopupCloseHander);
+closeZoomImageBtn.addEventListener("click", zoomImagePopupCloseHandler);
 
 openPopup.addEventListener("click", () => {
   inputName.value = profileName.textContent;
