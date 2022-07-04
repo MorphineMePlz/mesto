@@ -76,7 +76,8 @@ const createGalleryElement = (card) => {
   galleryList.prepend(galleryElement);
 
   deleteBtn.addEventListener("click", () => {
-    galleryElement.remove();
+    const listItem = deleteBtn.closest(".gallery__list-item");
+    listItem.remove();
   });
 
   galleryElement

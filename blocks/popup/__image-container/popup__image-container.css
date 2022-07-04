@@ -3,12 +3,4 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 75vh;
-  max-width: 75vw;
-}
-
-@media screen and (max-width: 450px) {
-  .popup__image-container {
-    height: 43vh;
-  }
 }

@@ -1,17 +1,17 @@
 .gallery__list {
   max-width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  row-gap: 20px;
+  column-gap: 17px;
+  grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
   padding: 0;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 980px) {
   .gallery__list {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
   }
 }
 
@@ -19,6 +19,8 @@
   .gallery__list {
     display: flex;
     max-width: 70%;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 }
 
