@@ -75,7 +75,7 @@ const createGalleryElement = (card) => {
   likeBtn.addEventListener("click", () => {
     likeBtn.classList.toggle("gallery__like-button_active");
   });
-  galleryList.prepend(galleryElement);
+  galleryList.append(galleryElement);
 
   deleteBtn.addEventListener("click", () => {
     const listItem = deleteBtn.closest(".gallery__list-item");
