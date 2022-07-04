@@ -63,8 +63,10 @@ const createGalleryElement = (card) => {
     .querySelector(".gallery__list-item")
     .cloneNode(true);
 
-  galleryElement.querySelector(".gallery__image").src = card.link;
-  galleryElement.querySelector(".gallery__image").alt = card.name;
+  const galleryImage = galleryElement.querySelector(".gallery__image");
+
+  galleryImage.src = card.link;
+  galleryImage.alt = card.name;
   galleryElement.querySelector(".gallery__title").textContent = card.name;
 
   const likeBtn = galleryElement.querySelector(".gallery__like-button");
@@ -80,14 +82,12 @@ const createGalleryElement = (card) => {
     listItem.remove();
   });
 
-  galleryElement
-    .querySelector(".gallery__image")
-    .addEventListener("click", () => {
-      popupZoom.classList.add("popup_active");
-      popupZoomImage.src = card.link;
-      popupZoomImage.alt = card.name;
-      popupZoomTitle.textContent = card.name;
-    });
+  galleryImage.addEventListener("click", () => {
+    popupZoom.classList.add("popup_active");
+    popupZoomImage.src = card.link;
+    popupZoomImage.alt = card.name;
+    popupZoomTitle.textContent = card.name;
+  });
 };
 
 initialCards.forEach((card) => {
