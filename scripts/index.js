@@ -56,7 +56,7 @@ const initialCards = [
     name: "Байкал",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
-];
+].reverse();
 
 const createGalleryElement = (card) => {
   const galleryElement = galleryTemplate
@@ -75,7 +75,7 @@ const createGalleryElement = (card) => {
   likeBtn.addEventListener("click", () => {
     likeBtn.classList.toggle("gallery__like-button_active");
   });
-  galleryList.append(galleryElement);
+  galleryList.prepend(galleryElement);
 
   deleteBtn.addEventListener("click", () => {
     const listItem = deleteBtn.closest(".gallery__list-item");
