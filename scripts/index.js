@@ -1,5 +1,4 @@
 import initialCards from "./cards.js";
-console.log(initialCards);
 
 // Change popup
 
@@ -15,12 +14,11 @@ const popupFormCloseButton = profilePopup.querySelector(".popup__close-button");
 // Place popup
 
 const popupPlace = document.querySelector(".popup_new-place");
-const inputPlace = document.querySelector(".popup__input_type_place");
-const inputLink = document.querySelector(".popup__input_type_link");
 const placePopupOpenButton = document.querySelector(".profile__plus-button");
 const placePopupCloseButton = popupPlace.querySelector(".popup__close-button");
 const popupPlaceForm = popupPlace.querySelector(".popup__form");
 const inputPlaceName = popupPlaceForm.querySelector(".popup__input_type_place");
+const inputPlaceLink = popupPlaceForm.querySelector(".popup__input_type_link");
 
 // Zoom popup
 
@@ -29,35 +27,16 @@ const imageZoomCloseButton = popupZoom.querySelector(".popup__close-button");
 const popupZoomImage = popupZoom.querySelector(".popup__image-place");
 const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
 
-const inputPlaceLink = popupPlaceForm.querySelector(".popup__input_type_link");
 const galleryList = document.querySelector(".gallery__list");
 const galleryTemplate = document.querySelector(".gallery__template").content;
-// const initialCards = [
-//   {
-//     name: "Архыз",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-//   },
-//   {
-//     name: "Челябинская область",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-//   },
-//   {
-//     name: "Иваново",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-//   },
-//   {
-//     name: "Камчатка",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-//   },
-//   {
-//     name: "Алматы",
-//     link: "https://images.unsplash.com/photo-1600255531849-9edcc7c3d115?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80",
-//   },
-//   {
-//     name: "Байкал",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-//   },
-// ].reverse();
+
+function openPopup(popup) {
+  popup.classList.add("popup_active");
+}
+
+function closePopup(popup) {
+  popup.classList.remove("popup_active");
+}
 
 const createCard = (card) => {
   const galleryElement = galleryTemplate
@@ -83,7 +62,7 @@ const createCard = (card) => {
   });
 
   galleryImage.addEventListener("click", () => {
-    popupZoom.classList.add("popup_active");
+    openPopup(popupZoom);
     popupZoomImage.src = card.link;
     popupZoomImage.alt = card.name;
     popupZoomTitle.textContent = card.name;
@@ -101,29 +80,11 @@ initialCards.forEach((card) => {
   renderCard(galleryItem);
 });
 
-// function closePopup(popup) {
-//   return popup.classList.remove(".popup_active");
-// }
-
-// closePopup(profilePopup);
-
-function closeProfilePopupHandler() {
-  profilePopup.classList.remove("popup_active");
-}
-function closeImagesZoomPopupHandler() {
-  popupZoom.classList.remove("popup_active");
-}
-
-function closePlacePopupHandler() {
-  popupPlace.classList.remove("popup_active");
-}
-
 function profileFormSubmitHandler(event) {
   event.preventDefault();
-
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
-  closeProfilePopupHandler();
+  closePopup(profilePopup);
 }
 
 function formSubmitPlaceHandler(event) {
@@ -132,26 +93,26 @@ function formSubmitPlaceHandler(event) {
     name: inputPlaceName.value,
     link: inputPlaceLink.value,
   };
-  renderCard(createCard(card));
-  closePlacePopupHandler();
+  const galleryItem = createCard(card);
+  renderCard(galleryItem);
+  closePopup(popupPlace);
 }
 
 // Event Listeners
 
 popupForm.addEventListener("submit", profileFormSubmitHandler);
 popupPlaceForm.addEventListener("submit", formSubmitPlaceHandler);
-popupFormCloseButton.addEventListener("click", closeProfilePopupHandler);
-placePopupCloseButton.addEventListener("click", closePlacePopupHandler);
-imageZoomCloseButton.addEventListener("click", closeImagesZoomPopupHandler);
+popupFormCloseButton.addEventListener("click", () => closePopup(profilePopup));
+placePopupCloseButton.addEventListener("click", () => closePopup(popupPlace));
+imageZoomCloseButton.addEventListener("click", () => closePopup(popupZoom));
 
 popupFormOpenButton.addEventListener("click", () => {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
-  profilePopup.classList.add("popup_active");
+  openPopup(profilePopup);
 });
 
 placePopupOpenButton.addEventListener("click", () => {
-  inputPlaceName.value = "";
-  inputPlaceLink.value = "";
-  popupPlace.classList.add("popup_active");
+  popupPlaceForm.reset();
+  openPopup(popupPlace);
 });
