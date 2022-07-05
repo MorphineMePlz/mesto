@@ -8,8 +8,10 @@ const inputName = popupForm.querySelector(".popup__input_type_name");
 const inputProfession = popupForm.querySelector(".popup__input_type_prof");
 const profileName = document.querySelector(".profile__title");
 const profileProfession = document.querySelector(".profile__profession");
-const popupFormOpenButton = document.querySelector(".profile__edit-button");
-const popupFormCloseButton = profilePopup.querySelector(".popup__close-button");
+const popupProfileOpenButton = document.querySelector(".profile__edit-button");
+const popupProfileCloseButton = profilePopup.querySelector(
+  ".popup__close-button"
+);
 
 // Place popup
 
@@ -102,11 +104,13 @@ function formSubmitPlaceHandler(event) {
 
 popupForm.addEventListener("submit", profileFormSubmitHandler);
 popupPlaceForm.addEventListener("submit", formSubmitPlaceHandler);
-popupFormCloseButton.addEventListener("click", () => closePopup(profilePopup));
+popupProfileCloseButton.addEventListener("click", () =>
+  closePopup(profilePopup)
+);
 placePopupCloseButton.addEventListener("click", () => closePopup(popupPlace));
 imageZoomCloseButton.addEventListener("click", () => closePopup(popupZoom));
 
-popupFormOpenButton.addEventListener("click", () => {
+popupProfileOpenButton.addEventListener("click", () => {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
   openPopup(profilePopup);
