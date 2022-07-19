@@ -2,6 +2,7 @@ import initialCards from "./cards.js";
 
 // Change popup
 
+const popups = document.querySelectorAll(".popup");
 const profilePopup = document.querySelector(".popup_profile");
 const popupForm = profilePopup.querySelector(".popup__form");
 const inputName = popupForm.querySelector(".popup__input_type_name");
@@ -119,51 +120,33 @@ placePopupOpenButton.addEventListener("click", () => {
   openPopup(popupPlace);
 });
 
-const popup = document.querySelectorAll(".popup");
-popup.forEach((i) => {
-  i.addEventListener("click", (e) => {
-    if (e.target === i) {
-      closePopup(profilePopup);
-      closePopup(popupPlace);
-      closePopup(popupZoom);
+const closeAllPopups = () => {
+  closePopup(profilePopup);
+  closePopup(popupPlace);
+  closePopup(popupZoom);
+};
+
+popups.forEach((popup) => {
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+      closeAllPopups();
     }
   });
 });
 
 document.addEventListener("keydown", (e) => {
   if (e.code === "Escape") {
-    closePopup(profilePopup);
-    closePopup(popupPlace);
-    closePopup(popupZoom);
+    closeAllPopups();
   }
 });
 
 //Validation
 
-const formElement = document.querySelectorAll(".popup__form");
-const formInput = document.querySelectorAll(".popup__input");
-
-const showInputError = (element) => {
-  element.classList.add("popup__input_type_error ");
-};
-
-const hideInputError = (element) => {
-  element.classList.remove("popup__input_type_error ");
-};
-
-formInput.forEach((input) => {
-  const isValid = () => {
-    if (!input.validity.valid) {
-      showInputError(input);
-    } else {
-      hideInputError(input);
-    }
-  };
-  input.addEventListener("input", isValid);
-});
-
-formElement.forEach((form) => {
-  form.addEventListener("submit", function (evt) {
-    evt.preventDefault();
-  });
-});
+// enableValidation({
+//   formSelector: ".popup__form",
+//   inputSelector: ".popup__input",
+//   submitButtonSelector: ".popup__button",
+//   inactiveButtonClass: "popup__button_disabled",
+//   inputErrorClass: "popup__input_type_error",
+//   errorClass: "popup__error_visible",
+// });
