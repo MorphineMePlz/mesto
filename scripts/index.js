@@ -32,9 +32,7 @@ const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
 const galleryList = document.querySelector(".gallery__list");
 const galleryTemplate = document.querySelector(".gallery__template").content;
 
-function openPopup(popup) {
-  clearFormErrors(popup);
-  popup.classList.add("popup_active");
+function setEventListeners(popup) {
   document.addEventListener("keyup", (e) => {
     if (e.code === "Escape") {
       closeAllPopups();
@@ -45,7 +43,32 @@ function openPopup(popup) {
       closeAllPopups();
     }
   });
+}
+
+function openPopup(popup) {
+  clearFormErrors(popup);
+  popup.classList.add("popup_active");
   body.classList.add("page_overflow");
+  setEventListeners(popup);
+}
+
+function removeEventListener(popup) {
+  document.removeEventListener("keyup", (e) => {
+    if (e.code === "Escape") {
+      closeAllPopups();
+    }
+  });
+  popup.removeEventListener("click", (e) => {
+    if (e.target === popup) {
+      closeAllPopups();
+    }
+  });
+}
+
+function closePopup(popup) {
+  popup.classList.remove("popup_active");
+  body.classList.remove("page_overflow");
+  removeEventListener(popup);
 }
 
 function clearFormErrors(popup) {
@@ -57,21 +80,6 @@ function clearFormErrors(popup) {
   inputs.forEach((input) => {
     input.classList.remove("popup__input_type_error");
   });
-}
-
-function closePopup(popup) {
-  popup.classList.remove("popup_active");
-  document.removeEventListener("keyup", (e) => {
-    if (e.code === "Escape") {
-      closeAllPopups();
-    }
-  });
-  popup.removeEventListener("click", (e) => {
-    if (e.target === popup) {
-      closeAllPopups();
-    }
-  });
-  body.classList.remove("page_overflow");
 }
 
 const createCard = (card) => {
