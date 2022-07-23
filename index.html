@@ -66,7 +66,11 @@
               />
               <span class="popup__error"></span>
             </label>
-            <button type="submit" class="popup__submit-button">
+            <button
+              disabled
+              type="submit"
+              class="popup__submit-button popup__submit-button_invalid"
+            >
               Сохранить
             </button>
           </form>
@@ -77,23 +81,35 @@
         <div class="popup__container">
           <h2 class="popup__title">Новое место</h2>
           <form name="createPlace" class="popup__form" novalidate>
-            <input
-              type="text"
-              class="popup__input popup__input_type_place"
-              placeholder="Название"
-              required
-              minlength="2"
-              maxlength="30"
-              name="place"
-            />
-            <input
-              class="popup__input popup__input_type_link"
-              placeholder="Ссылка на картинку"
-              required
-              type="url"
-              name="link"
-            />
-            <button type="submit" class="popup__submit-button">Создать</button>
+            <label class="popup__field">
+              <input
+                type="text"
+                class="popup__input popup__input_type_place"
+                placeholder="Название"
+                required
+                minlength="2"
+                maxlength="30"
+                name="place"
+              />
+              <span class="popup__error"></span>
+            </label>
+            <label class="popup__field">
+              <input
+                class="popup__input popup__input_type_link"
+                placeholder="Ссылка на картинку"
+                required
+                type="url"
+                name="link"
+              />
+              <span class="popup__error"></span>
+            </label>
+            <button
+              disabled
+              type="submit"
+              class="popup__submit-button popup__submit-button_invalid"
+            >
+              Создать
+            </button>
           </form>
           <button type="button" class="popup__close-button"></button>
         </div>

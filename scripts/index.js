@@ -34,11 +34,43 @@ const galleryList = document.querySelector(".gallery__list");
 const galleryTemplate = document.querySelector(".gallery__template").content;
 
 function openPopup(popup) {
+  clearFormErrors(popup);
   popup.classList.add("popup_active");
+  document.addEventListener("keyup", (e) => {
+    if (e.code === "Escape") {
+      closeAllPopups();
+    }
+  });
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+      closeAllPopups();
+    }
+  });
+}
+
+function clearFormErrors(popup) {
+  const inputErrors = Array.from(popup.querySelectorAll(".popup__error"));
+  const inputs = Array.from(popup.querySelectorAll(".popup__input"));
+  inputErrors.forEach((error) => {
+    error.textContent = "";
+  });
+  inputs.forEach((input) => {
+    input.classList.remove("popup__input_type_error");
+  });
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_active");
+  document.removeEventListener("keyup", (e) => {
+    if (e.code === "Escape") {
+      closeAllPopups();
+    }
+  });
+  popup.removeEventListener("click", (e) => {
+    if (e.target === popup) {
+      closeAllPopups();
+    }
+  });
 }
 
 const createCard = (card) => {
@@ -125,28 +157,3 @@ const closeAllPopups = () => {
   closePopup(popupPlace);
   closePopup(popupZoom);
 };
-
-popups.forEach((popup) => {
-  popup.addEventListener("click", (e) => {
-    if (e.target === popup) {
-      closeAllPopups();
-    }
-  });
-});
-
-document.addEventListener("keydown", (e) => {
-  if (e.code === "Escape") {
-    closeAllPopups();
-  }
-});
-
-//Validation
-
-// enableValidation({
-//   formSelector: ".popup__form",
-//   inputSelector: ".popup__input",
-//   submitButtonSelector: ".popup__button",
-//   inactiveButtonClass: "popup__button_disabled",
-//   inputErrorClass: "popup__input_type_error",
-//   errorClass: "popup__error_visible",
-// });

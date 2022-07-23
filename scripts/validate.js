@@ -1,108 +1,50 @@
 //Validation;
 
-// const formElement = document.querySelector(".popup__form");
-// const formInput = formElement.querySelector(".popup__input");
-
-// const showInputError = (element) => {
-//   element.classList.add("popup__input_type_error");
-// };
-
-// const hideInputError = (element) => {
-//   element.classList.remove("popup__input_type_error");
-// };
-
-// const isValid = () => {
-//   if (!formInput.validity.valid) {
-//     // Если поле не проходит валидацию, покажем ошибку
-//     showInputError(formInput);
-//   } else {
-//     // Если проходит, скроем
-//     hideInputError(formInput);
-//   }
-// };
-
-// formElement.addEventListener("submit", function (evt) {
-//   // Отменим стандартное поведение по сабмиту
-//   evt.preventDefault();
-// });
-
-// formInput.addEventListener("input", isValid);
-
-// enableValidation({
-//   formSelector: ".popup__form",
-//   inputSelector: ".popup__input",
-//   submitButtonSelector: ".popup__button",
-//   inactiveButtonClass: "popup__button_disabled",
-//   inputErrorClass: "popup__input_type_error",
-//   errorClass: "popup__error_visible",
-// });
-
-// const formElement = document.querySelectorAll(".popup__form");
-// formElement.forEach((form) => {
-//   const formInput = form.querySelectorAll(".popup__input");
-//   console.log(formInput);
-// });
-
-// function setCustomError(input) {
-//   const validity = input.validity;
-//   input.
-// }
-
-const profileName = document.querySelector(".profile__title");
-const profileProfession = document.querySelector(".profile__profession");
-const inputName = document.querySelector(".popup__input_type_name");
-const inputProfession = document.querySelector(".popup__input_type_prof");
-
-const formChangeProfile = {
-  form: '.popup__form[name="changeProfile"]',
+const allSelectorsClass = {
+  form: ".popup__form",
+  button: ".popup__submit-button",
+  input: ".popup__input",
+  inputTypeError: "popup__input_type_error",
+  buttonInvalid: "popup__submit-button_invalid",
 };
 
 function enableValidation(config) {
-  const form = document.querySelector(config.form);
-  form.addEventListener("submit", handlerFormSubmit);
-  form.addEventListener("input", handlerFormInput);
+  const form = Array.from(document.querySelectorAll(config.form));
+  form.forEach((form) => {
+    const button = form.querySelector(config.button);
+    form.addEventListener("input", (event) => {
+      handlerFormInput(event, config, button);
+    });
+  });
 }
 
-function handlerFormSubmit(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const isValid = form.checkValidity();
-  if (isValid) {
-    profileName.textContent = inputName.value;
-    profileProfession.textContent = inputProfession.value;
-  }
-}
-
-function handlerFormInput(event) {
+function handlerFormInput(event, config, button) {
   const input = event.target;
   const form = event.currentTarget;
-  if (!input.validity.valid) {
-    showInputError(input);
-  } else {
-    hideInputError(input);
-  }
-  input.addEventListener("input", handlerFormInput);
-  setCustomError(input);
-  showFieldError(input);
-  console.log(event.target.validity.valid);
+  const isValid = form.checkValidity();
+  showFieldError(input, config);
+  setSubmitButtonState(button, config, isValid);
 }
 
-const showInputError = (element) => {
-  element.classList.add("popup__input_type_error");
-};
-
-const hideInputError = (element) => {
-  element.classList.remove("popup__input_type_error");
-};
-
-function setCustomError(input) {
-  const validity = input.validity;
-  input.setCustomValidity("");
-}
-
-function showFieldError(input) {
+function showFieldError(input, config) {
   const span = input.nextElementSibling;
   span.textContent = input.validationMessage;
+  if (input.validationMessage !== "") {
+    input.classList.add(config.inputTypeError);
+  } else {
+    input.classList.remove(config.inputTypeError);
+  }
 }
 
-enableValidation(formChangeProfile);
+function setSubmitButtonState(button, config, isValid) {
+  if (isValid) {
+    button.disabled = false;
+    button.classList.remove(config.buttonInvalid);
+  }
+  if (!isValid) {
+    button.disabled = true;
+    button.classList.add(config.buttonInvalid);
+  }
+}
+
+enableValidation(allSelectorsClass);
