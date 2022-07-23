@@ -12,3 +12,7 @@
   margin: 0 auto;
   max-width: 100%;
 }
+
+.page_overflow {
+  overflow: hidden;
+}

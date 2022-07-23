@@ -1,8 +1,7 @@
 import initialCards from "./cards.js";
 
 // Change popup
-
-const popups = document.querySelectorAll(".popup");
+const body = document.querySelector("body");
 const profilePopup = document.querySelector(".popup_profile");
 const popupForm = profilePopup.querySelector(".popup__form");
 const inputName = popupForm.querySelector(".popup__input_type_name");
@@ -46,6 +45,7 @@ function openPopup(popup) {
       closeAllPopups();
     }
   });
+  body.classList.add("page_overflow");
 }
 
 function clearFormErrors(popup) {
@@ -71,6 +71,7 @@ function closePopup(popup) {
       closeAllPopups();
     }
   });
+  body.classList.remove("page_overflow");
 }
 
 const createCard = (card) => {

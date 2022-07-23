@@ -1,5 +1,6 @@
 .profile__profession {
-  max-width: 90%;
+  max-width: 336px;
+  width: 100%;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;

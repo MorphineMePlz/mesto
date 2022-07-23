@@ -5,7 +5,7 @@ const allSelectorsClass = {
   button: ".popup__submit-button",
   input: ".popup__input",
   inputTypeError: "popup__input_type_error",
-  buttonInvalid: "popup__submit-button_invalid",
+  buttonDisabled: "popup__submit-button_disabled",
 };
 
 function enableValidation(config) {
@@ -39,11 +39,11 @@ function showFieldError(input, config) {
 function setSubmitButtonState(button, config, isValid) {
   if (isValid) {
     button.disabled = false;
-    button.classList.remove(config.buttonInvalid);
+    button.classList.remove(config.buttonDisabled);
   }
   if (!isValid) {
     button.disabled = true;
-    button.classList.add(config.buttonInvalid);
+    button.classList.add(config.buttonDisabled);
   }
 }
 
