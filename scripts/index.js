@@ -1,4 +1,5 @@
 import initialCards from "./cards.js";
+import clearFormErrors from "./validate.js";
 
 // Change popup
 const body = document.querySelector("body");
@@ -33,54 +34,34 @@ const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
 const galleryList = document.querySelector(".gallery__list");
 const galleryTemplate = document.querySelector(".gallery__template").content;
 
-function setEventListeners(popup) {
-  document.addEventListener("keyup", (e) => {
-    if (e.code === "Escape") {
-      closeAllPopups();
-    }
-  });
-  popup.addEventListener("click", (e) => {
-    if (e.target === popup) {
-      closeAllPopups();
-    }
-  });
+function closePopupByEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_active");
+    closePopup(openedPopup);
+  }
 }
 
 function openPopup(popup) {
   clearFormErrors(popup);
   popup.classList.add("popup_active");
   body.classList.add("page_overflow");
-  setEventListeners(popup);
+  document.addEventListener("keyup", closePopupByEsc);
+  popup.addEventListener("mousedown", closePopupByOverlay);
 }
 
-function removeEventListener(popup) {
-  document.removeEventListener("keyup", (e) => {
-    if (e.code === "Escape") {
-      closeAllPopups();
-    }
-  });
-  popup.removeEventListener("click", (e) => {
-    if (e.target === popup) {
-      closeAllPopups();
-    }
-  });
+function closePopupByOverlay(evt) {
+  if (evt.target !== evt.currentTarget) {
+    return;
+  }
+  const openedPopup = document.querySelector(".popup_active");
+  closePopup(openedPopup);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_active");
   body.classList.remove("page_overflow");
-  removeEventListener(popup);
-}
-
-function clearFormErrors(popup) {
-  const inputErrors = Array.from(popup.querySelectorAll(".popup__error"));
-  const inputs = Array.from(popup.querySelectorAll(".popup__input"));
-  inputErrors.forEach((error) => {
-    error.textContent = "";
-  });
-  inputs.forEach((input) => {
-    input.classList.remove("popup__input_type_error");
-  });
+  document.removeEventListener("keyup", closePopupByEsc);
+  popup.removeEventListener("mousedown", closePopupByOverlay);
 }
 
 const createCard = (card) => {
@@ -163,9 +144,3 @@ placePopupOpenButton.addEventListener("click", () => {
   popupPlaceForm.reset();
   openPopup(popupPlace);
 });
-
-const closeAllPopups = () => {
-  closePopup(profilePopup);
-  closePopup(popupPlace);
-  closePopup(popupZoom);
-};

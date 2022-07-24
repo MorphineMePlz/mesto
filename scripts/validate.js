@@ -48,4 +48,17 @@ function setSubmitButtonState(button, config, isValid) {
   }
 }
 
+function clearFormErrors(popup) {
+  const inputErrors = Array.from(popup.querySelectorAll(".popup__error"));
+  const inputs = Array.from(popup.querySelectorAll(".popup__input"));
+  inputErrors.forEach((error) => {
+    error.textContent = "";
+  });
+  inputs.forEach((input) => {
+    input.classList.remove("popup__input_type_error");
+  });
+}
+
 enableValidation(allSelectorsClass);
+
+export default clearFormErrors;

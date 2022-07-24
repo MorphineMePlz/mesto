@@ -1,4 +1,4 @@
-# Домашняя работа № 5: Место
+# Домашняя работа № 6: Место
 
 ## Обзор
 
@@ -16,4 +16,4 @@
 
 ## 2. Figma
 
-[Ссылка на макет](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1)
+[Ссылка на макет](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)
