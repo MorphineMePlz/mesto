@@ -21,6 +21,7 @@ const placePopupCloseButton = popupPlace.querySelector(".popup__close-button");
 const popupPlaceForm = popupPlace.querySelector(".popup__form");
 const inputPlaceName = popupPlaceForm.querySelector(".popup__input_type_place");
 const inputPlaceLink = popupPlaceForm.querySelector(".popup__input_type_link");
+const buttonPlaceSubmit = popupPlace.querySelector(".popup__submit-button");
 
 // Zoom popup
 
@@ -140,6 +141,8 @@ function formSubmitPlaceHandler(event) {
   const galleryItem = createCard(card);
   renderCard(galleryItem);
   closePopup(popupPlace);
+  buttonPlaceSubmit.setAttribute("disabled", true);
+  buttonPlaceSubmit.classList.add("popup__submit-button_disabled");
 }
 
 popupForm.addEventListener("submit", profileFormSubmitHandler);

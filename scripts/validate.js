@@ -6,6 +6,7 @@ const allSelectorsClass = {
   input: ".popup__input",
   inputTypeError: "popup__input_type_error",
   buttonDisabled: "popup__submit-button_disabled",
+  popupError: ".popup__error",
 };
 
 function enableValidation(config) {
@@ -27,7 +28,7 @@ function handlerFormInput(event, config, button) {
 }
 
 function showFieldError(input, config) {
-  const span = input.nextElementSibling;
+  const span = document.getElementById(`${input.getAttribute("name")}-error`);
   span.textContent = input.validationMessage;
   if (input.validationMessage !== "") {
     input.classList.add(config.inputTypeError);
