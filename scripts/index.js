@@ -10,15 +10,11 @@ const inputProfession = popupForm.querySelector(".popup__input_type_prof");
 const profileName = document.querySelector(".profile__title");
 const profileProfession = document.querySelector(".profile__profession");
 const popupProfileOpenButton = document.querySelector(".profile__edit-button");
-const popupProfileCloseButton = profilePopup.querySelector(
-  ".popup__close-button"
-);
 
 // Place popup
 
 const popupPlace = document.querySelector(".popup_new-place");
 const placePopupOpenButton = document.querySelector(".profile__plus-button");
-const placePopupCloseButton = popupPlace.querySelector(".popup__close-button");
 const popupPlaceForm = popupPlace.querySelector(".popup__form");
 const inputPlaceName = popupPlaceForm.querySelector(".popup__input_type_place");
 const inputPlaceLink = popupPlaceForm.querySelector(".popup__input_type_link");
@@ -27,7 +23,6 @@ const buttonPlaceSubmit = popupPlace.querySelector(".popup__submit-button");
 // Zoom popup
 
 const popupZoom = document.querySelector(".popup_image");
-const imageZoomCloseButton = popupZoom.querySelector(".popup__close-button");
 const popupZoomImage = popupZoom.querySelector(".popup__image-place");
 const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
 
@@ -42,7 +37,6 @@ function closePopupByEsc(evt) {
 }
 
 function openPopup(popup) {
-  clearFormErrors(popup);
   popup.classList.add("popup_active");
   body.classList.add("page_overflow");
   document.addEventListener("keyup", closePopupByEsc);
@@ -50,11 +44,12 @@ function openPopup(popup) {
 }
 
 function closePopupByOverlay(evt) {
-  if (evt.target !== evt.currentTarget) {
-    return;
+  if (
+    evt.target === evt.currentTarget ||
+    evt.target.classList.contains("popup__close-button")
+  ) {
+    closePopup(evt.currentTarget);
   }
-  const openedPopup = document.querySelector(".popup_active");
-  closePopup(openedPopup);
 }
 
 function closePopup(popup) {
@@ -128,19 +123,16 @@ function formSubmitPlaceHandler(event) {
 
 popupForm.addEventListener("submit", profileFormSubmitHandler);
 popupPlaceForm.addEventListener("submit", formSubmitPlaceHandler);
-popupProfileCloseButton.addEventListener("click", () =>
-  closePopup(profilePopup)
-);
-placePopupCloseButton.addEventListener("click", () => closePopup(popupPlace));
-imageZoomCloseButton.addEventListener("click", () => closePopup(popupZoom));
 
 popupProfileOpenButton.addEventListener("click", () => {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
+  clearFormErrors(profilePopup);
   openPopup(profilePopup);
 });
 
 placePopupOpenButton.addEventListener("click", () => {
   popupPlaceForm.reset();
+  clearFormErrors(popupPlace);
   openPopup(popupPlace);
 });
