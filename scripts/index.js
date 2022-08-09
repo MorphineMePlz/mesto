@@ -1,5 +1,6 @@
-import initialCards from "./cards.js";
+import { initialCards } from "./initialCards.js";
 import clearFormErrors from "./validate.js";
+import Card from "./card.js";
 
 // Change popup
 const body = document.querySelector("body");
@@ -22,12 +23,7 @@ const buttonPlaceSubmit = popupPlace.querySelector(".popup__submit-button");
 
 // Zoom popup
 
-const popupZoom = document.querySelector(".popup_image");
-const popupZoomImage = popupZoom.querySelector(".popup__image-place");
-const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
-
 const galleryList = document.querySelector(".gallery__list");
-const galleryTemplate = document.querySelector(".gallery__template").content;
 
 function closePopupByEsc(evt) {
   if (evt.key === "Escape") {
@@ -36,7 +32,7 @@ function closePopupByEsc(evt) {
   }
 }
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_active");
   body.classList.add("page_overflow");
   document.addEventListener("keyup", closePopupByEsc);
@@ -59,46 +55,14 @@ function closePopup(popup) {
   popup.removeEventListener("mousedown", closePopupByOverlay);
 }
 
-const createCard = (card) => {
-  const galleryElement = galleryTemplate
-    .querySelector(".gallery__list-item")
-    .cloneNode(true);
-
-  const galleryImage = galleryElement.querySelector(".gallery__image");
-
-  galleryImage.src = card.link;
-  galleryImage.alt = card.name;
-  galleryElement.querySelector(".gallery__title").textContent = card.name;
-
-  const buttonLike = galleryElement.querySelector(".gallery__like-button");
-  const buttonDelete = galleryElement.querySelector(".gallery__delete-button");
-
-  buttonLike.addEventListener("click", () => {
-    buttonLike.classList.toggle("gallery__like-button_active");
-  });
-
-  buttonDelete.addEventListener("click", () => {
-    const listItem = buttonDelete.closest(".gallery__list-item");
-    listItem.remove();
-  });
-
-  galleryImage.addEventListener("click", () => {
-    openPopup(popupZoom);
-    popupZoomImage.src = card.link;
-    popupZoomImage.alt = card.name;
-    popupZoomTitle.textContent = card.name;
-  });
-
-  return galleryElement;
-};
-
 const renderCard = (card) => {
   galleryList.prepend(card);
 };
 
-initialCards.forEach((card) => {
-  const galleryItem = createCard(card);
-  renderCard(galleryItem);
+initialCards.forEach((item) => {
+  const card = new Card(item, ".gallery__template");
+  const cardElement = card.generateCard();
+  renderCard(cardElement);
 });
 
 function profileFormSubmitHandler(event) {
@@ -114,8 +78,9 @@ function formSubmitPlaceHandler(event) {
     name: inputPlaceName.value,
     link: inputPlaceLink.value,
   };
-  const galleryItem = createCard(card);
-  renderCard(galleryItem);
+  const newCard = new Card(card, ".gallery__template");
+  const cardElement = newCard.generateCard();
+  renderCard(cardElement);
   closePopup(popupPlace);
   buttonPlaceSubmit.setAttribute("disabled", true);
   buttonPlaceSubmit.classList.add("popup__submit-button_disabled");
