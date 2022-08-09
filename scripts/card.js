@@ -1,11 +1,5 @@
-import { openPopup } from "./index.js";
-const popupZoom = document.querySelector(".popup_image");
-const popupZoomImage = popupZoom.querySelector(".popup__image-place");
-const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
-const popupZoomCloseButton = popupZoom.querySelector(".popup__close-button");
-
 class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._card = templateSelector;
@@ -28,15 +22,6 @@ class Card {
     this._element.querySelector(".gallery__title").textContent = this._name;
 
     return this._element;
-  }
-
-  _hanlerOpenZoomPopup() {
-    this._addEventListener("click", () => {
-      openPopup(popupZoom);
-      popupZoomImage.src = this._link;
-      popupZoomImage.alt = this._name;
-      popupZoomTitle.textContent = this._name;
-    });
   }
 
   _handleLikeClick() {
@@ -62,6 +47,10 @@ class Card {
 
     buttonDelete.addEventListener("click", () => {
       this._handleDeleteClick();
+    });
+
+    this._galleryImage.addEventListener("click", () => {
+      this._handleCardClick(this._name, this._link);
     });
   }
 }

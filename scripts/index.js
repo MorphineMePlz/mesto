@@ -24,6 +24,9 @@ const buttonPlaceSubmit = popupPlace.querySelector(".popup__submit-button");
 // Zoom popup
 
 const galleryList = document.querySelector(".gallery__list");
+const popupZoom = document.querySelector(".popup_image");
+const popupZoomImage = popupZoom.querySelector(".popup__image-place");
+const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
 
 function closePopupByEsc(evt) {
   if (evt.key === "Escape") {
@@ -64,6 +67,13 @@ initialCards.forEach((item) => {
   const cardElement = card.generateCard();
   renderCard(cardElement);
 });
+
+handleCardClick(name, link) {
+  popupZoomImage.src = link;
+   popupZoomImage.alt = name;
+   popupZoomTitle.textContent = name;
+   openPopup(popupZoom);
+}
 
 function profileFormSubmitHandler(event) {
   event.preventDefault();
