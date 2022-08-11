@@ -17,10 +17,9 @@ class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector(".gallery__image");
-    this._element.src = this._link;
-    this._element.alt = this._name;
+    this._element.querySelector(".gallery__image").src = this._link;
     this._element.querySelector(".gallery__title").textContent = this._name;
+    this._element.querySelector(".gallery__title").alt = this._name;
 
     return this._element;
   }
@@ -52,7 +51,7 @@ class Card {
       });
 
     this._element
-      .querySelector(".popup__image-place")
+      .querySelector(".gallery__image")
       .addEventListener("click", () => {
         this._handleCardClick(this._name, this._link);
       });
