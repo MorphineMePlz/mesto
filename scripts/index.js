@@ -58,22 +58,22 @@ function closePopup(popup) {
   popup.removeEventListener("mousedown", closePopupByOverlay);
 }
 
+const handleCardClick = (name, link) => {
+  popupZoomImage.src = link;
+  popupZoomImage.alt = name;
+  popupZoomTitle.textContent = name;
+  openPopup(popupZoom);
+};
+
 const renderCard = (card) => {
   galleryList.prepend(card);
 };
 
 initialCards.forEach((item) => {
-  const card = new Card(item, ".gallery__template");
+  const card = new Card(item, ".gallery__template", handleCardClick);
   const cardElement = card.generateCard();
   renderCard(cardElement);
 });
-
-handleCardClick(name, link) {
-  popupZoomImage.src = link;
-   popupZoomImage.alt = name;
-   popupZoomTitle.textContent = name;
-   openPopup(popupZoom);
-}
 
 function profileFormSubmitHandler(event) {
   event.preventDefault();

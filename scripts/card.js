@@ -3,6 +3,7 @@ class Card {
     this._name = data.name;
     this._link = data.link;
     this._card = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -38,20 +39,23 @@ class Card {
   }
 
   _setEventListeners() {
-    const buttonLike = this._element.querySelector(".gallery__like-button");
-    const buttonDelete = this._element.querySelector(".gallery__delete-button");
+    this._element
+      .querySelector(".gallery__like-button")
+      .addEventListener("click", () => {
+        this._handleLikeClick();
+      });
 
-    buttonLike.addEventListener("click", () => {
-      this._handleLikeClick();
-    });
+    this._element
+      .querySelector(".gallery__delete-button")
+      .addEventListener("click", () => {
+        this._handleDeleteClick();
+      });
 
-    buttonDelete.addEventListener("click", () => {
-      this._handleDeleteClick();
-    });
-
-    this._galleryImage.addEventListener("click", () => {
-      this._handleCardClick(this._name, this._link);
-    });
+    this._element
+      .querySelector(".popup__image-place")
+      .addEventListener("click", () => {
+        this._handleCardClick(this._name, this._link);
+      });
   }
 }
 
