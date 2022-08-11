@@ -17,9 +17,9 @@ class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    const galleryImage = this._element.querySelector(".gallery__image");
-    galleryImage.src = this._link;
-    galleryImage.alt = this._name;
+    this._element.querySelector(".gallery__image");
+    this._element.src = this._link;
+    this._element.alt = this._name;
     this._element.querySelector(".gallery__title").textContent = this._name;
 
     return this._element;

@@ -35,7 +35,7 @@ function closePopupByEsc(evt) {
   }
 }
 
-export function openPopup(popup) {
+function openPopup(popup) {
   popup.classList.add("popup_active");
   body.classList.add("page_overflow");
   document.addEventListener("keyup", closePopupByEsc);
@@ -58,15 +58,15 @@ function closePopup(popup) {
   popup.removeEventListener("mousedown", closePopupByOverlay);
 }
 
+const renderCard = (card) => {
+  galleryList.prepend(card);
+};
+
 const handleCardClick = (name, link) => {
   popupZoomImage.src = link;
   popupZoomImage.alt = name;
   popupZoomTitle.textContent = name;
   openPopup(popupZoom);
-};
-
-const renderCard = (card) => {
-  galleryList.prepend(card);
 };
 
 initialCards.forEach((item) => {
@@ -88,7 +88,7 @@ function formSubmitPlaceHandler(event) {
     name: inputPlaceName.value,
     link: inputPlaceLink.value,
   };
-  const newCard = new Card(card, ".gallery__template");
+  const newCard = new Card(card, ".gallery__template", handleCardClick);
   const cardElement = newCard.generateCard();
   renderCard(cardElement);
   closePopup(popupPlace);
