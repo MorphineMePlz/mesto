@@ -1,6 +1,6 @@
 import { initialCards } from "./initialCards.js";
-import clearFormErrors from "./validate.js";
 import Card from "./card.js";
+import FormValidator from "./validate.js";
 
 // Change popup
 const body = document.querySelector("body");
@@ -27,6 +27,17 @@ const galleryList = document.querySelector(".gallery__list");
 const popupZoom = document.querySelector(".popup_image");
 const popupZoomImage = popupZoom.querySelector(".popup__image-place");
 const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
+
+// selectors object
+
+const allSelectorsClasses = {
+  form: ".popup__form",
+  button: ".popup__submit-button",
+  input: ".popup__input",
+  inputTypeError: "popup__input_type_error",
+  buttonDisabled: "popup__submit-button_disabled",
+  popupError: ".popup__error",
+};
 
 function closePopupByEsc(evt) {
   if (evt.key === "Escape") {
@@ -56,6 +67,12 @@ function closePopup(popup) {
   body.classList.remove("page_overflow");
   document.removeEventListener("keyup", closePopupByEsc);
   popup.removeEventListener("mousedown", closePopupByOverlay);
+
+  if (popup !== popupZoom) {
+    const button = popup.querySelector(allSelectorsClasses.button);
+    button.disabled = true;
+    button.classList.add(allSelectorsClasses.buttonDisabled);
+  }
 }
 
 const renderCard = (card) => {
@@ -74,6 +91,15 @@ initialCards.forEach((item) => {
   const cardElement = card.generateCard();
   renderCard(cardElement);
 });
+
+const formProfileCheckValid = new FormValidator(allSelectorsClasses, popupForm);
+formProfileCheckValid.enableValidation();
+
+const formPlaceCheckValid = new FormValidator(
+  allSelectorsClasses,
+  popupPlaceForm
+);
+formPlaceCheckValid.enableValidation();
 
 function profileFormSubmitHandler(event) {
   event.preventDefault();
@@ -102,12 +128,12 @@ popupPlaceForm.addEventListener("submit", formSubmitPlaceHandler);
 popupProfileOpenButton.addEventListener("click", () => {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
-  clearFormErrors(profilePopup);
+  formProfileCheckValid.clearFormErrors();
   openPopup(profilePopup);
 });
 
 placePopupOpenButton.addEventListener("click", () => {
   popupPlaceForm.reset();
-  clearFormErrors(popupPlace);
+  formPlaceCheckValid.clearFormErrors();
   openPopup(popupPlace);
 });
