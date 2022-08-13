@@ -67,12 +67,6 @@ function closePopup(popup) {
   body.classList.remove("page_overflow");
   document.removeEventListener("keyup", closePopupByEsc);
   popup.removeEventListener("mousedown", closePopupByOverlay);
-
-  if (popup !== popupZoom) {
-    const button = popup.querySelector(allSelectorsClasses.button);
-    button.disabled = true;
-    button.classList.add(allSelectorsClasses.buttonDisabled);
-  }
 }
 
 const renderCard = (card) => {
