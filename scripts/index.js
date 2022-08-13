@@ -1,6 +1,6 @@
 import { initialCards } from "./initialCards.js";
-import Card from "./card.js";
-import FormValidator from "./validate.js";
+import Card from "./Card.js";
+import FormValidator from "./Validate.js";
 
 // Change popup
 const body = document.querySelector("body");
@@ -86,10 +86,14 @@ const handleCardClick = (name, link) => {
   openPopup(popupZoom);
 };
 
-initialCards.forEach((item) => {
+const initializationCards = (item) => {
   const card = new Card(item, ".gallery__template", handleCardClick);
   const cardElement = card.generateCard();
   renderCard(cardElement);
+};
+
+initialCards.forEach((item) => {
+  initializationCards(item);
 });
 
 const formProfileCheckValid = new FormValidator(allSelectorsClasses, popupForm);
@@ -114,12 +118,11 @@ function formSubmitPlaceHandler(event) {
     name: inputPlaceName.value,
     link: inputPlaceLink.value,
   };
-  const newCard = new Card(card, ".gallery__template", handleCardClick);
-  const cardElement = newCard.generateCard();
-  renderCard(cardElement);
-  closePopup(popupPlace);
+
   buttonPlaceSubmit.setAttribute("disabled", true);
   buttonPlaceSubmit.classList.add("popup__submit-button_disabled");
+  initializationCards(card);
+  closePopup(popupPlace);
 }
 
 popupForm.addEventListener("submit", profileFormSubmitHandler);
