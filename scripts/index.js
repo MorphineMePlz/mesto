@@ -37,6 +37,7 @@ const allSelectorsClasses = {
   inputTypeError: "popup__input_type_error",
   buttonDisabled: "popup__submit-button_disabled",
   popupError: ".popup__error",
+  template: ".gallery__template",
 };
 
 function closePopupByEsc(evt) {
@@ -80,14 +81,14 @@ const handleCardClick = (name, link) => {
   openPopup(popupZoom);
 };
 
-const initializationCards = (item) => {
-  const card = new Card(item, ".gallery__template", handleCardClick);
+const createCard = (item) => {
+  const card = new Card(item, allSelectorsClasses.template, handleCardClick);
   const cardElement = card.generateCard();
   renderCard(cardElement);
 };
 
 initialCards.forEach((item) => {
-  initializationCards(item);
+  createCard(item);
 });
 
 const formProfileCheckValid = new FormValidator(allSelectorsClasses, popupForm);
@@ -115,7 +116,7 @@ function formSubmitPlaceHandler(event) {
 
   buttonPlaceSubmit.setAttribute("disabled", true);
   buttonPlaceSubmit.classList.add("popup__submit-button_disabled");
-  initializationCards(card);
+  createCard(card);
   closePopup(popupPlace);
 }
 
