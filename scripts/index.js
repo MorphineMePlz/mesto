@@ -11,6 +11,7 @@ const inputProfession = popupForm.querySelector(".popup__input_type_prof");
 const profileName = document.querySelector(".profile__title");
 const profileProfession = document.querySelector(".profile__profession");
 const popupProfileOpenButton = document.querySelector(".profile__edit-button");
+const profileSubmitButton = popupForm.querySelector(".popup__submit-button");
 
 // Place popup
 
@@ -63,11 +64,17 @@ function closePopupByOverlay(evt) {
   }
 }
 
+function setInitialButtonStates() {
+  formProfileCheckValid.handleInitialButtonState(profileSubmitButton);
+  formProfileCheckValid.handleInitialButtonState(buttonPlaceSubmit);
+}
+
 function closePopup(popup) {
   popup.classList.remove("popup_active");
   body.classList.remove("page_overflow");
   document.removeEventListener("keyup", closePopupByEsc);
   popup.removeEventListener("mousedown", closePopupByOverlay);
+  setInitialButtonStates();
 }
 
 const renderCard = (card) => {
