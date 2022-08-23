@@ -1,6 +1,8 @@
 import { initialCards } from "./initialCards.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+import Section from "./Section.js";
+import Popup from "./Popup.js";
 
 // Change popup
 const body = document.querySelector("body");
@@ -24,7 +26,6 @@ const buttonPlaceSubmit = popupPlace.querySelector(".popup__submit-button");
 
 // Zoom popup
 
-const galleryList = document.querySelector(".gallery__list");
 const popupZoom = document.querySelector(".popup_image");
 const popupZoomImage = popupZoom.querySelector(".popup__image-place");
 const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
@@ -47,6 +48,8 @@ function closePopupByEsc(evt) {
     closePopup(openedPopup);
   }
 }
+
+const popup = new Popup(".popup_profile");
 
 function openPopup(popup) {
   popup.classList.add("popup_active");
@@ -77,10 +80,6 @@ function closePopup(popup) {
   setInitialButtonStates();
 }
 
-const renderCard = (card) => {
-  galleryList.prepend(card);
-};
-
 const handleCardClick = (name, link) => {
   popupZoomImage.src = link;
   popupZoomImage.alt = name;
@@ -91,12 +90,17 @@ const handleCardClick = (name, link) => {
 const createCard = (item) => {
   const card = new Card(item, allSelectorsClasses.template, handleCardClick);
   const cardElement = card.generateCard();
-  renderCard(cardElement);
+  section.addItem(cardElement);
 };
 
-initialCards.forEach((item) => {
-  createCard(item);
-});
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: createCard,
+  },
+  ".gallery__list"
+);
+section.generateCards();
 
 const formProfileCheckValid = new FormValidator(allSelectorsClasses, popupForm);
 formProfileCheckValid.enableValidation();
@@ -134,7 +138,7 @@ popupProfileOpenButton.addEventListener("click", () => {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
   formProfileCheckValid.clearFormErrors();
-  openPopup(profilePopup);
+  popup.open();
 });
 
 placePopupOpenButton.addEventListener("click", () => {
