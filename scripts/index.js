@@ -3,6 +3,7 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 // Change popup
 const profilePopup = document.querySelector(".popup_profile");
@@ -42,6 +43,7 @@ const allSelectorsClasses = {
 };
 
 const popupProfile = new Popup(".popup_profile");
+const popupImage = new PopupWithImage(".popup_image");
 
 function setInitialButtonStates() {
   formProfileCheckValid.handleInitialButtonState(profileSubmitButton);
@@ -52,14 +54,10 @@ function closePopup() {
   setInitialButtonStates();
 }
 
-const handleCardClick = (name, link) => {
-  popupZoomImage.src = link;
-  popupZoomImage.alt = name;
-  popupZoomTitle.textContent = name;
-};
-
 const createCard = (item) => {
-  const card = new Card(item, allSelectorsClasses.template, handleCardClick);
+  const card = new Card(item, allSelectorsClasses.template, (obj) =>
+    popupImage.open(obj)
+  );
   const cardElement = card.generateCard();
   section.addItem(cardElement);
 };
