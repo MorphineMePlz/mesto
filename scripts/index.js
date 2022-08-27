@@ -2,16 +2,13 @@ import { initialCards } from "./initialCards.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
-import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 
 // Change popup
 const profilePopup = document.querySelector(".popup_profile");
 const popupForm = profilePopup.querySelector(".popup__form");
-const inputName = popupForm.querySelector(".popup__input_type_name");
-const inputProfession = popupForm.querySelector(".popup__input_type_prof");
-const profileName = document.querySelector(".profile__title");
-const profileProfession = document.querySelector(".profile__profession");
 const popupProfileOpenButton = document.querySelector(".profile__edit-button");
 const profileSubmitButton = popupForm.querySelector(".popup__submit-button");
 
@@ -23,12 +20,6 @@ const popupPlaceForm = popupPlace.querySelector(".popup__form");
 const inputPlaceName = popupPlaceForm.querySelector(".popup__input_type_place");
 const inputPlaceLink = popupPlaceForm.querySelector(".popup__input_type_link");
 const buttonPlaceSubmit = popupPlace.querySelector(".popup__submit-button");
-
-// Zoom popup
-
-const popupZoom = document.querySelector(".popup_image");
-const popupZoomImage = popupZoom.querySelector(".popup__image-place");
-const popupZoomTitle = popupZoom.querySelector(".popup__image-title");
 
 // selectors object
 
@@ -42,18 +33,21 @@ const allSelectorsClasses = {
   template: ".gallery__template",
 };
 
-const popupProfile = new Popup(".popup_profile");
+// создание экземпляра PopupWithForm
+const popupProfile = new PopupWithForm(
+  ".popup_profile",
+  profileFormSubmitHandler
+);
+
+const userInfo = new UserInfo({
+  name: ".profile__title",
+  job: ".profile__profession",
+});
+
+// создание экземпляра PopupWithImage
 const popupImage = new PopupWithImage(".popup_image");
 
-function setInitialButtonStates() {
-  formProfileCheckValid.handleInitialButtonState(profileSubmitButton);
-  formProfileCheckValid.handleInitialButtonState(buttonPlaceSubmit);
-}
-
-function closePopup() {
-  setInitialButtonStates();
-}
-
+// создание экземпляра Card
 const createCard = (item) => {
   const card = new Card(item, allSelectorsClasses.template, (obj) =>
     popupImage.open(obj)
@@ -61,6 +55,8 @@ const createCard = (item) => {
   const cardElement = card.generateCard();
   section.addItem(cardElement);
 };
+
+//создание экземпляра Section
 
 const section = new Section(
   {
@@ -71,6 +67,8 @@ const section = new Section(
 );
 section.generateCards();
 
+// создание экземляра FormValidator
+
 const formProfileCheckValid = new FormValidator(allSelectorsClasses, popupForm);
 formProfileCheckValid.enableValidation();
 
@@ -80,13 +78,19 @@ const formPlaceCheckValid = new FormValidator(
 );
 formPlaceCheckValid.enableValidation();
 
-// логика
+function setInitialButtonStates() {
+  formProfileCheckValid.handleInitialButtonState(profileSubmitButton);
+  formProfileCheckValid.handleInitialButtonState(buttonPlaceSubmit);
+}
+
+function closePopup() {
+  setInitialButtonStates();
+}
+
+// недоделанный функционал
 
 function profileFormSubmitHandler(event) {
   event.preventDefault();
-  profileName.textContent = inputName.value;
-  profileProfession.textContent = inputProfession.value;
-  closePopup(profilePopup);
 }
 
 function formSubmitPlaceHandler(event) {
@@ -102,17 +106,13 @@ function formSubmitPlaceHandler(event) {
   closePopup(popupPlace);
 }
 
-popupForm.addEventListener("submit", profileFormSubmitHandler);
 popupPlaceForm.addEventListener("submit", formSubmitPlaceHandler);
 
 popupProfileOpenButton.addEventListener("click", () => {
-  inputName.value = profileName.textContent;
-  inputProfession.value = profileProfession.textContent;
   formProfileCheckValid.clearFormErrors();
   popupProfile.open();
 });
 
 placePopupOpenButton.addEventListener("click", () => {
-  popupPlaceForm.reset();
   formPlaceCheckValid.clearFormErrors();
 });
