@@ -39,6 +39,8 @@ const popupProfile = new PopupWithForm(
   profileFormSubmitHandler
 );
 
+const popupWithFormCards = new PopupWithForm(".popup_new-place,");
+
 const userInfo = new UserInfo({
   name: ".profile__title",
   job: ".profile__profession",
@@ -89,8 +91,8 @@ function closePopup() {
 
 // недоделанный функционал
 
-function profileFormSubmitHandler(event) {
-  event.preventDefault();
+function profileFormSubmitHandler(value) {
+  userInfo.setUserInfo(value);
 }
 
 function formSubmitPlaceHandler(event) {
