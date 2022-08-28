@@ -39,7 +39,10 @@ const popupProfile = new PopupWithForm(
   profileFormSubmitHandler
 );
 
-const popupWithFormCards = new PopupWithForm(".popup_new-place,");
+const popupWithFormCards = new PopupWithForm(
+  ".popup_new-place",
+  formSubmitPlaceHandler
+);
 
 const userInfo = new UserInfo({
   name: ".profile__title",
@@ -85,30 +88,18 @@ function setInitialButtonStates() {
   formProfileCheckValid.handleInitialButtonState(buttonPlaceSubmit);
 }
 
-function closePopup() {
-  setInitialButtonStates();
-}
-
 // недоделанный функционал
 
 function profileFormSubmitHandler(value) {
   userInfo.setUserInfo(value);
 }
 
-function formSubmitPlaceHandler(event) {
-  event.preventDefault();
-  const card = {
-    name: inputPlaceName.value,
-    link: inputPlaceLink.value,
-  };
-
+function formSubmitPlaceHandler(card) {
   buttonPlaceSubmit.setAttribute("disabled", true);
   buttonPlaceSubmit.classList.add("popup__submit-button_disabled");
+  console.log(card);
   createCard(card);
-  closePopup(popupPlace);
 }
-
-popupPlaceForm.addEventListener("submit", formSubmitPlaceHandler);
 
 popupProfileOpenButton.addEventListener("click", () => {
   formProfileCheckValid.clearFormErrors();
@@ -117,4 +108,5 @@ popupProfileOpenButton.addEventListener("click", () => {
 
 placePopupOpenButton.addEventListener("click", () => {
   formPlaceCheckValid.clearFormErrors();
+  popupWithFormCards.open();
 });
