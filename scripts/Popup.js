@@ -8,8 +8,7 @@ class Popup {
   open() {
     this._popup.classList.add("popup_active");
     body.classList.add("page_overflow");
-    this.handleCloseEsc = this._handleEscClose.bind(this);
-    this.setEventListeners();
+    document.addEventListener("keyup", (evt) => this._handleEscClose(evt));
   }
 
   close() {
@@ -34,12 +33,11 @@ class Popup {
   }
 
   setEventListeners() {
-    document.addEventListener("keyup", this.handleCloseEsc);
     this._popup.addEventListener("click", (evt) => this._handleClose(evt));
   }
 
   _removeEventListeners() {
-    document.removeEventListener("keyup", this.handleCloseEsc);
+    document.removeEventListener("keyup", (evt) => this._handleEscClose(evt));
     this._popup.removeEventListener("click", (evt) => this._handleClose(evt));
   }
 }

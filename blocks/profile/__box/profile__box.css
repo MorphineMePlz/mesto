@@ -1,5 +1,5 @@
 .profile__box {
-  max-width: 345px;
+  max-width: 100%;
   display: flex;
 }
 

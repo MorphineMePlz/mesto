@@ -8,6 +8,16 @@ class PopupWithForm extends Popup {
     this._form = this._popup.querySelector(".popup__form");
   }
 
+  _findInput(key) {
+    return Array.from(this._form).find((i) => i.name === key);
+  }
+
+  setInitialValues(initialValues) {
+    Object.keys(initialValues).forEach(
+      (key) => (this._findInput(key).value = initialValues[key])
+    );
+  }
+
   close() {
     this._form.reset();
     super.close();
@@ -22,12 +32,12 @@ class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
+    super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleSubmit(this._getInputValues());
       this.close();
     });
-    super.setEventListeners();
   }
 }
 

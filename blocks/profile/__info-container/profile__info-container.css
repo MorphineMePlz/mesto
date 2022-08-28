@@ -1,6 +1,7 @@
 .profile__info-container {
   display: flex;
-  max-width: 336px;
+  width: 100%;
+  max-width: 70%;
   min-height: 73px;
   text-overflow: ellipsis;
   white-space: nowrap;
