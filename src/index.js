@@ -31,8 +31,8 @@ const createCard = (cardData) => {
 };
 
 const userInfo = new UserInfo({
-  name: classCreationSelectors.userName,
-  job: classCreationSelectors.userJob,
+  nameSelector: classCreationSelectors.userName,
+  jobSelector: classCreationSelectors.userJob,
 });
 
 const section = new Section(

@@ -1,8 +1,7 @@
 class UserInfo {
-  // у меня на этой логике многие вещи завязаны, в том числе и вёрстка, менять это будет очень проблемно. Могу ли я оставить эти названия? Заранее благодарю.
-  constructor({ name, job }) {
-    this._name = document.querySelector(name);
-    this._job = document.querySelector(job);
+  constructor({ nameSelector, jobSelector }) {
+    this._name = document.querySelector(nameSelector);
+    this._job = document.querySelector(jobSelector);
   }
 
   getUserInfo() {
