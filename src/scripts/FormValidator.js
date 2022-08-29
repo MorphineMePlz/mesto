@@ -6,7 +6,7 @@ class FormValidator {
     this._formType = formType;
   }
 
-  _handlerFormInput(event) {
+  _handleFormInput(event) {
     this._input = event.target;
     this._form = event.currentTarget;
     this._button = this._form.querySelector(this._config.button);
@@ -35,7 +35,7 @@ class FormValidator {
       this._button = form.querySelector(this._config.button);
       this._disableButton(this._button);
       form.addEventListener("input", (event) => {
-        this._handlerFormInput(event);
+        this._handleFormInput(event);
       });
     });
   }

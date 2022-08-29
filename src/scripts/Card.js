@@ -25,9 +25,8 @@ class Card {
   }
 
   _handleLikeClick() {
-    this._element
-      .querySelector(".gallery__like-button")
-      .classList.toggle("gallery__like-button_active");
+    this._element.classList // .querySelector(".gallery__like-button")
+      .toggle("gallery__like-button_active");
   }
 
   _handleDeleteClick() {
@@ -35,6 +34,7 @@ class Card {
       .querySelector(".gallery__delete-button")
       .closest(".gallery__list-item")
       .remove();
+    this._element = null;
   }
 
   _setEventListeners() {

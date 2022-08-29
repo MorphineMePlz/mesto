@@ -21,8 +21,8 @@ import {
   buttonPlaceSubmit,
 } from "./utils/domElements.js";
 
-const createCard = (item) => {
-  const card = new Card(item, selectorClasses.template, (obj) =>
+const createCard = (cardData) => {
+  const card = new Card(cardData, selectorClasses.template, (obj) =>
     popupImage.open(obj)
   );
   const cardElement = card.generateCard();
@@ -30,8 +30,8 @@ const createCard = (item) => {
 };
 
 const userInfo = new UserInfo({
-  name: classCreationSelectors.userName,
-  job: classCreationSelectors.userJob,
+  nameSelector: classCreationSelectors.userName,
+  jobSelector: classCreationSelectors.userJob,
 });
 
 const section = new Section(

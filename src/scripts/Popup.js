@@ -1,20 +1,18 @@
 const body = document.querySelector("body");
 
 class Popup {
-  constructor(popup) {
-    this._popup = document.querySelector(popup);
+  constructor(popupSelector) {
+    this._popupSelector = document.querySelector(popupSelector);
   }
 
   open() {
-    this._popup.classList.add("popup_active");
-    body.classList.add("page_overflow");
+    this._popupSelector.classList.add("popup_active");
     document.addEventListener("keyup", (evt) => this._handleEscClose(evt));
   }
 
   close() {
-    this._popup.classList.remove("popup_active");
-    body.classList.remove("page_overflow");
-    this._removeEventListeners();
+    this._popupSelector.classList.remove("popup_active");
+    document.removeEventListener("keyup", (evt) => this._handleEscClose(evt));
   }
 
   _handleEscClose(evt) {
@@ -33,12 +31,9 @@ class Popup {
   }
 
   setEventListeners() {
-    this._popup.addEventListener("click", (evt) => this._handleClose(evt));
-  }
-
-  _removeEventListeners() {
-    document.removeEventListener("keyup", (evt) => this._handleEscClose(evt));
-    this._popup.removeEventListener("click", (evt) => this._handleClose(evt));
+    this._popupSelector.addEventListener("click", (evt) =>
+      this._handleClose(evt)
+    );
   }
 }
 
