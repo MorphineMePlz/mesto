@@ -2,13 +2,13 @@ class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
-    this._card = cardSelector;
+    this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
     const galleryElement = document
-      .querySelector(this._card)
+      .querySelector(this._cardSelector)
       .content.querySelector(".gallery__list-item")
       .cloneNode(true);
     return galleryElement;
@@ -25,15 +25,15 @@ class Card {
   }
 
   _handleLikeClick() {
-    this._element.classList // .querySelector(".gallery__like-button")
-      .toggle("gallery__like-button_active");
+    this._element
+
+      .querySelector(".gallery__like-button")
+
+      .classList.toggle("gallery__like-button_active");
   }
 
   _handleDeleteClick() {
-    this._element
-      .querySelector(".gallery__delete-button")
-      .closest(".gallery__list-item")
-      .remove();
+    this._element.closest(".gallery__list-item").remove();
     this._element = null;
   }
 

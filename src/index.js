@@ -26,30 +26,36 @@ const createCard = (cardData) => {
     popupImage.open(obj)
   );
   const cardElement = card.generateCard();
-  section.addItem(cardElement);
+  return cardElement;
 };
 
 const userInfo = new UserInfo({
-  nameSelector: classCreationSelectors.userName,
-  jobSelector: classCreationSelectors.userJob,
+  name: classCreationSelectors.userName,
+  job: classCreationSelectors.userJob,
 });
 
 const section = new Section(
   {
     items: initialCards,
-    renderer: createCard,
+    renderer: (item) => {
+      section.addItem(createCard(item));
+    },
   },
   classCreationSelectors.cardList
 );
 
-const popupProfile = new PopupWithForm(
-  classCreationSelectors.profilePopup,
-  (v) => userInfo.setUserInfo(v)
-);
-const popupWithFormCards = new PopupWithForm(
-  classCreationSelectors.placePopup,
-  createCard
-);
+const popupProfile = new PopupWithForm({
+  popupSelector: classCreationSelectors.profilePopup,
+  handleSubmit: (v) => userInfo.setUserInfo(v),
+});
+const popupWithFormCards = new PopupWithForm({
+  popupSelector: classCreationSelectors.placePopup,
+  handleSubmit: (data) => {
+    section.addItem(createCard(data));
+    popupWithFormCards.close();
+  },
+});
+
 const popupImage = new PopupWithImage(classCreationSelectors.imagePopup);
 
 popupImage.setEventListeners();

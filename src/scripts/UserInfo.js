@@ -1,19 +1,20 @@
 class UserInfo {
-  constructor({ nameSelector, jobSelector }) {
-    this._nameSelector = document.querySelector(nameSelector);
-    this._jobSelector = document.querySelector(jobSelector);
+  // у меня на этой логике многие вещи завязаны, в том числе и вёрстка, менять это будет очень проблемно. Могу ли я оставить эти названия? Заранее благодарю.
+  constructor({ name, job }) {
+    this._name = document.querySelector(name);
+    this._job = document.querySelector(job);
   }
 
   getUserInfo() {
     return {
-      name: this._nameSelector.textContent,
-      job: this._jobSelector.textContent,
+      name: this._name.textContent,
+      job: this._job.textContent,
     };
   }
 
-  setUserInfo({ nameSelector, jobSelector }) {
-    this._nameSelector.textContent = nameSelector;
-    this._jobSelector.textContent = jobSelector;
+  setUserInfo({ name, job }) {
+    this._name.textContent = name;
+    this._job.textContent = job;
   }
 }
 export default UserInfo;
