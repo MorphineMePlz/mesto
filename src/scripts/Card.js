@@ -1,6 +1,6 @@
 class Card {
   constructor(data, cardSelector, handleCardClick) {
-    this._name = data.name;
+    this._place = data.place;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -18,8 +18,8 @@ class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
     this._element.querySelector(".gallery__image").src = this._link;
-    this._element.querySelector(".gallery__title").textContent = this._name;
-    this._element.querySelector(".gallery__title").alt = this._name;
+    this._element.querySelector(".gallery__title").textContent = this._place;
+    this._element.querySelector(".gallery__title").alt = this._place;
 
     return this._element;
   }

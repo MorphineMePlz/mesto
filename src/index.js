@@ -26,6 +26,7 @@ const createCard = (cardData) => {
     popupImage.open(obj)
   );
   const cardElement = card.generateCard();
+
   return cardElement;
 };
 
@@ -52,6 +53,7 @@ const popupWithFormCards = new PopupWithForm({
   popupSelector: classCreationSelectors.placePopup,
   handleSubmit: (data) => {
     section.addItem(createCard(data));
+    console.log(data);
     popupWithFormCards.close();
   },
 });
