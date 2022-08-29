@@ -9,7 +9,7 @@ export const selectorClasses = {
 };
 
 export const classCreationSelectors = {
-  userplace: ".profile__title",
+  userName: ".profile__title",
   userJob: ".profile__profession",
   profilePopup: ".popup_profile",
   placePopup: ".popup_new-place",

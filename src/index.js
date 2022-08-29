@@ -53,7 +53,6 @@ const popupWithFormCards = new PopupWithForm({
   popupSelector: classCreationSelectors.placePopup,
   handleSubmit: (data) => {
     section.addItem(createCard(data));
-    console.log(data);
     popupWithFormCards.close();
   },
 });
