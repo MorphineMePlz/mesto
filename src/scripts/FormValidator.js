@@ -14,6 +14,7 @@ class FormValidator {
     this._input = event.target;
     this._setErrorInput(this._input);
     this._setSubmitButtonStateValid(this._formType);
+    this._setSubmitButtonFormState(this._formType);
   }
 
   _showFieldError(input) {
@@ -25,16 +26,23 @@ class FormValidator {
     this._span.textContent = "";
   }
 
-  _setSubmitButtonStateValid(form) {
-    const isValid = form.checkValidity();
-    if (isValid) {
-      this._button.removeAttribute("disabled");
-      this._button.classList.remove(this._config.buttonDisabled);
-    }
+  _setSubmitButtonStateValid() {
+    this._button.removeAttribute("disabled");
+    this._button.classList.remove(this._config.buttonDisabled);
   }
+
   _setSubmitButtonStateNotValid() {
     this._button.setAttribute("disabled", true);
     this._button.classList.add(this._config.buttonDisabled);
+  }
+
+  _setSubmitButtonFormState() {
+    const isValid = this._formType.checkValidity();
+    if (isValid) {
+      this._setSubmitButtonStateValid();
+    } else {
+      this._setSubmitButtonStateNotValid();
+    }
   }
 
   enableValidation() {
