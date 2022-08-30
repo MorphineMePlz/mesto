@@ -33,7 +33,7 @@ class Card {
   }
 
   _handleDeleteClick() {
-    this._element.closest(".gallery__list-item").remove();
+    this._element.remove();
     this._element = null;
   }
 

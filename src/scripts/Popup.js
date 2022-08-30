@@ -1,17 +1,15 @@
-const body = document.querySelector("body");
-
 class Popup {
   constructor(popupSelector) {
-    this._popupSelector = document.querySelector(popupSelector);
+    this._popup = document.querySelector(popupSelector);
   }
 
   open() {
-    this._popupSelector.classList.add("popup_active");
+    this._popup.classList.add("popup_active");
     document.addEventListener("keyup", (evt) => this._handleEscClose(evt));
   }
 
   close() {
-    this._popupSelector.classList.remove("popup_active");
+    this._popup.classList.remove("popup_active");
     document.removeEventListener("keyup", (evt) => this._handleEscClose(evt));
   }
 
@@ -31,9 +29,7 @@ class Popup {
   }
 
   setEventListeners() {
-    this._popupSelector.addEventListener("click", (evt) =>
-      this._handleClose(evt)
-    );
+    this._popup.addEventListener("click", (evt) => this._handleClose(evt));
   }
 }
 
