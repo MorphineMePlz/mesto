@@ -53,7 +53,6 @@ class Card {
     this._element
       .querySelector(".gallery__image")
       .addEventListener("click", () => {
-        console.log(this._place);
         this._handleCardClick({ place: this._place, link: this._link });
       });
   }
