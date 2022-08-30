@@ -37,7 +37,8 @@ const section = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      section.addItem(createCard(item));
+      const cardElement = createCard(item);
+      section.addItem(cardElement);
     },
   },
   classCreationSelectors.cardList
@@ -50,7 +51,8 @@ const popupProfile = new PopupWithForm({
 const popupWithFormCards = new PopupWithForm({
   popupSelector: classCreationSelectors.placePopup,
   handleSubmit: (data) => {
-    section.addItem(createCard(data));
+    const cardElement = createCard(data);
+    section.addItem(cardElement);
     popupWithFormCards.close();
   },
 });
@@ -70,7 +72,8 @@ formPlaceCheckValid.enableValidation();
 
 popupProfileOpenButton.addEventListener("click", () => {
   formProfileCheckValid.clearFormErrors();
-  popupProfile.setInitialValues(userInfo.getUserInfo());
+  const initialData = userInfo.getUserInfo();
+  popupProfile.setInitialValues(initialData);
   popupProfile.open();
 });
 
