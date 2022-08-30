@@ -1,13 +1,10 @@
 .popup__submit-button_disabled {
+  color: black;
+  background-color: unset;
+  color: rgb(0%, 0%, 0%, 0.2);
+  border-radius: 2px;
   border: 1px solid rgb(0%, 0%, 0%, 0.2);
   background-color: white;
-  color: rgb(0%, 0%, 0%, 0.2);
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  text-align: center;
-  padding: 14px 0 18px 0;
-  border-radius: 2px;
 }
 
 .popup__submit-button_disabled:hover {
@@ -15,11 +12,15 @@
   cursor: not-allowed;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 568px) {
   .popup__submit-button_disabled {
+    width: 238px;
+    height: 46px;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    padding: 14px 0 14px 0;
+    margin-left: 22px;
+    margin-bottom: 27px;
+    margin-top: 15px;
   }
 }

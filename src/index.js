@@ -13,12 +13,10 @@ import {
 } from "./utils/constants.js";
 
 import {
-  popupForm,
   popupProfileOpenButton,
-  profileSubmitButton,
+  popupPlace,
+  profilePopup,
   placePopupOpenButton,
-  popupPlaceForm,
-  buttonPlaceSubmit,
 } from "./utils/domElements.js";
 
 const createCard = (cardData) => {
@@ -64,21 +62,19 @@ popupProfile.setEventListeners();
 popupWithFormCards.setEventListeners();
 section.generateCards();
 
-const formProfileCheckValid = new FormValidator(selectorClasses, popupForm);
+const formProfileCheckValid = new FormValidator(selectorClasses, profilePopup);
 formProfileCheckValid.enableValidation();
 
-const formPlaceCheckValid = new FormValidator(selectorClasses, popupPlaceForm);
+const formPlaceCheckValid = new FormValidator(selectorClasses, popupPlace);
 formPlaceCheckValid.enableValidation();
 
 popupProfileOpenButton.addEventListener("click", () => {
   formProfileCheckValid.clearFormErrors();
-  formProfileCheckValid.handleInitialButtonState(profileSubmitButton);
   popupProfile.setInitialValues(userInfo.getUserInfo());
   popupProfile.open();
 });
 
 placePopupOpenButton.addEventListener("click", () => {
   formPlaceCheckValid.clearFormErrors();
-  formProfileCheckValid.handleInitialButtonState(buttonPlaceSubmit);
   popupWithFormCards.open();
 });
