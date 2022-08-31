@@ -1,3 +1,5 @@
+import { ESCAPE_KEY } from "../utils/constants.js";
+
 class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
@@ -16,7 +18,7 @@ class Popup {
   }
 
   _handleEscClose(event) {
-    if (event.keyCode === 27) {
+    if (event.key === ESCAPE_KEY) {
       this.close();
     }
   }

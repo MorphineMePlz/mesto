@@ -17,6 +17,8 @@ export const classCreationSelectors = {
   cardList: ".gallery__list",
 };
 
+export const ESCAPE_KEY = "Escape";
+
 export const initialCards = [
   {
     place: "Dubai",
