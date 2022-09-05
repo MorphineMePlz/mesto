@@ -5,6 +5,7 @@ import Section from "./scripts/Section.js";
 import PopupWithImage from "./scripts/PopupWithImage.js";
 import PopupWithForm from "./scripts/PopupWithForm.js";
 import UserInfo from "./scripts/UserInfo.js";
+import Api from "./scripts/Api.js";
 
 import {
   selectorClasses,
@@ -32,6 +33,22 @@ const userInfo = new UserInfo({
   nameSelector: classCreationSelectors.userName,
   jobSelector: classCreationSelectors.userJob,
 });
+
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-50",
+  headers: {
+    authorization: "ecb6ef6c-d4a1-4cc5-86ed-4ee02166ff91",
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getUserInformation()
+  .then((res) => {
+    console.log(res);
+    userInfo.setUserInfo({ name: res.name, job: res.about });
+  })
+  .catch((error) => console.log("Ошибка:"`${error}`));
 
 const section = new Section(
   {
