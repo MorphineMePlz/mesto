@@ -42,17 +42,25 @@ const api = new Api({
   },
 });
 
+const apiCards = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-50/cards",
+  headers: {
+    authorization: "ecb6ef6c-d4a1-4cc5-86ed-4ee02166ff91",
+    "Content-Type": "application/json",
+  },
+});
+
 api
   .getUserInformation()
   .then((res) => {
-    console.log(res);
     userInfo.setUserInfo({ name: res.name, job: res.about });
   })
   .catch((error) => console.log("Ошибка:"`${error}`));
 
+const cardsArrayFromServer = [];
 const section = new Section(
   {
-    items: initialCards,
+    items: cardsArrayFromServer,
     renderer: (item) => {
       const cardElement = createCard(item);
       section.addItem(cardElement);
@@ -60,6 +68,13 @@ const section = new Section(
   },
   classCreationSelectors.cardList
 );
+
+apiCards.getInitialCards().then((res) => {
+  res.forEach((element, index) => {
+    cardsArrayFromServer[index] = element;
+  });
+  section.generateCards();
+});
 
 const popupProfile = new PopupWithForm({
   popupSelector: classCreationSelectors.profilePopup,
