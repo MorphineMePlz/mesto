@@ -5,7 +5,7 @@ import Section from "./scripts/Section.js";
 import PopupWithImage from "./scripts/PopupWithImage.js";
 import PopupWithForm from "./scripts/PopupWithForm.js";
 import UserInfo from "./scripts/UserInfo.js";
-import Api from "./scripts/Api.js";
+import { api } from "./scripts/Api.js";
 
 import { selectorClasses, classCreationSelectors } from "./utils/constants.js";
 
@@ -30,28 +30,12 @@ const userInfo = new UserInfo({
   jobSelector: classCreationSelectors.userJob,
 });
 
-const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-50",
-  headers: {
-    authorization: "ecb6ef6c-d4a1-4cc5-86ed-4ee02166ff91",
-    "Content-Type": "application/json",
-  },
-});
-
-const apiCards = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-50/cards",
-  headers: {
-    authorization: "ecb6ef6c-d4a1-4cc5-86ed-4ee02166ff91",
-    "Content-Type": "application/json",
-  },
-});
-
 api
   .getUserInformation()
   .then((res) => {
     userInfo.setUserInfo({ name: res.name, job: res.about });
   })
-  .catch((error) => console.log("Ошибка:"`${error}`));
+  .catch((error) => console.log(error));
 
 const cardsArrayFromServer = [];
 const section = new Section(
@@ -65,12 +49,15 @@ const section = new Section(
   classCreationSelectors.cardList
 );
 
-apiCards.getInitialCards().then((res) => {
-  res.map((element) => {
-    cardsArrayFromServer.push(element);
-  });
-  section.generateCards();
-});
+api
+  .getInitialCards()
+  .then((res) => {
+    res.map((element) => {
+      cardsArrayFromServer.push(element);
+    });
+    section.generateCards();
+  })
+  .catch((error) => console.log(error));
 
 const popupProfile = new PopupWithForm({
   popupSelector: classCreationSelectors.profilePopup,
