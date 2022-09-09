@@ -7,11 +7,7 @@ import PopupWithForm from "./scripts/PopupWithForm.js";
 import UserInfo from "./scripts/UserInfo.js";
 import Api from "./scripts/Api.js";
 
-import {
-  selectorClasses,
-  classCreationSelectors,
-  initialCards,
-} from "./utils/constants.js";
+import { selectorClasses, classCreationSelectors } from "./utils/constants.js";
 
 import {
   popupProfileOpenButton,
@@ -70,8 +66,8 @@ const section = new Section(
 );
 
 apiCards.getInitialCards().then((res) => {
-  res.forEach((element, index) => {
-    cardsArrayFromServer[index] = element;
+  res.map((element) => {
+    cardsArrayFromServer.push(element);
   });
   section.generateCards();
 });
@@ -82,8 +78,11 @@ const popupProfile = new PopupWithForm({
 });
 const popupWithFormCards = new PopupWithForm({
   popupSelector: classCreationSelectors.placePopup,
-  handleSubmit: (data) => {
-    const cardElement = createCard(data);
+  handleSubmit: ({ place, link }) => {
+    const cardElement = createCard({
+      name: place,
+      link,
+    });
     section.addItem(cardElement);
     popupWithFormCards.close();
   },
