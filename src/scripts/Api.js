@@ -1,6 +1,3 @@
-import { data } from "autoprefixer";
-import { ids } from "webpack";
-
 class Api {
   constructor(setting) {
     this._address = setting.baseUrl;
