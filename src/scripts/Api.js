@@ -1,4 +1,5 @@
 import { data } from "autoprefixer";
+import { ids } from "webpack";
 
 class Api {
   constructor(setting) {
@@ -46,6 +47,13 @@ class Api {
         name: place,
         link,
       }),
+    }).then((res) => this.handelResponse(res));
+  }
+
+  deleteOwnCard(id) {
+    return fetch(`${this._address}/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
     }).then((res) => this.handelResponse(res));
   }
 }

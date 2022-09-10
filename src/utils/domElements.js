@@ -6,6 +6,8 @@ export const popupPlace = document.querySelector(
   ".popup__form[name='createPlace']"
 );
 
+export const confirmationPopup = document.querySelector(".popup_confirmation");
+
 export const popupProfileOpenButton = document.querySelector(
   ".profile__edit-button"
 );

@@ -14,13 +14,27 @@ import {
   popupPlace,
   profilePopup,
   placePopupOpenButton,
+  confirmationPopup,
 } from "./utils/domElements.js";
+import PopupConfirm from "./scripts/PopupConfirm";
 
 const popupLoader = new PopupWithImage(classCreationSelectors.loaderPopup);
 
+const popupConfirm = new PopupConfirm(
+  classCreationSelectors.confirmationPopup,
+  (v) => api.deleteOwnCard(v)
+);
+
+const openConfirmationPopup = (id) => {
+  popupConfirm.open(id);
+};
+
 const createCard = (cardData) => {
-  const card = new Card(cardData, selectorClasses.template, (obj) =>
-    popupImage.open(obj)
+  const card = new Card(
+    cardData,
+    selectorClasses.template,
+    (obj) => popupImage.open(obj),
+    (v) => openConfirmationPopup(v)
   );
   const cardElement = card.generateCard();
 
@@ -86,6 +100,7 @@ const popupImage = new PopupWithImage(classCreationSelectors.imagePopup);
 popupImage.setEventListeners();
 popupProfile.setEventListeners();
 popupWithFormCards.setEventListeners();
+popupConfirm.setEventListeners();
 section.generateCards();
 
 const formProfileCheckValid = new FormValidator(selectorClasses, profilePopup);

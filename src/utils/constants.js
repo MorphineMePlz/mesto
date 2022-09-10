@@ -12,6 +12,7 @@ export const classCreationSelectors = {
   userName: ".profile__title",
   userJob: ".profile__profession",
   profilePopup: ".popup_profile",
+  confirmationPopup: ".popup_confirmation",
   placePopup: ".popup_new-place",
   imagePopup: ".popup_image",
   loaderPopup: ".popup_loader",
