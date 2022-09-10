@@ -2,6 +2,8 @@ export const profilePopup = document.querySelector(
   ".popup__form[name='changeProfile']"
 );
 
+export const confirmationPopup = document.querySelector(".popup_confirmation");
+
 export const popupPlace = document.querySelector(
   ".popup__form[name='createPlace']"
 );

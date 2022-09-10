@@ -1,5 +1,3 @@
-import { data } from "autoprefixer";
-
 class Api {
   constructor(setting) {
     this._address = setting.baseUrl;
@@ -46,6 +44,13 @@ class Api {
         name: place,
         link,
       }),
+    }).then((res) => this.handelResponse(res));
+  }
+
+  deleteOwnCard(id) {
+    return fetch(`${this._address}/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
     }).then((res) => this.handelResponse(res));
   }
 }
