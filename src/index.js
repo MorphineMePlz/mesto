@@ -14,7 +14,6 @@ import {
   popupPlace,
   profilePopup,
   placePopupOpenButton,
-  confirmationPopup,
 } from "./utils/domElements.js";
 import PopupConfirm from "./scripts/PopupConfirm";
 

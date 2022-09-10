@@ -37,6 +37,7 @@ class Card {
 
   _handleDeleteCard() {
     this._openPopupConfirm(this._cardId);
+    console.log(this._cardId);
   }
 
   // _handleDeleteClick() {
