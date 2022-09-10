@@ -14,6 +14,7 @@ export const classCreationSelectors = {
   profilePopup: ".popup_profile",
   placePopup: ".popup_new-place",
   imagePopup: ".popup_image",
+  loaderPopup: ".popup_loader",
   cardList: ".gallery__list",
 };
 

@@ -19,11 +19,11 @@ class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
     this._element.querySelector(".gallery__title").textContent = this._place;
-
     this._image = this._element.querySelector(".gallery__image");
     this._image.src = this._link;
     this._image.alt = this._place;
-
+    this._likeCount = this._element.querySelector(".gallery__like-count");
+    this._likeCount.textContent = this._likes.length;
     return this._element;
   }
 

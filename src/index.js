@@ -16,6 +16,8 @@ import {
   placePopupOpenButton,
 } from "./utils/domElements.js";
 
+const popupLoader = new PopupWithImage(classCreationSelectors.loaderPopup);
+
 const createCard = (cardData) => {
   const card = new Card(cardData, selectorClasses.template, (obj) =>
     popupImage.open(obj)
@@ -52,6 +54,7 @@ const section = new Section(
 api
   .getInitialCards()
   .then((res) => {
+    popupLoader.close();
     res.reverse().map((element) => {
       cardsArrayFromServer.push(element);
     });

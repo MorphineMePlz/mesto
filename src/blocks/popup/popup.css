@@ -15,3 +15,10 @@
   transition: visibility 0.1s, opacity 0.1s linear;
   opacity: 0;
 }
+
+.popup_loader {
+  background-image: url("../../images/loader.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 7%;
+}

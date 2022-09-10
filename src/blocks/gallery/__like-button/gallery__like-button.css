@@ -1,3 +1,10 @@
+.gallery__like-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .gallery__like-button {
   width: 22px;
   height: 19px;
@@ -7,9 +14,14 @@
   background-position: center;
   border: none;
   background-color: white;
+  margin-bottom: 3px;
 }
 
 .gallery__like-button:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+
+.gallery__like-count {
+  color: black;
 }
