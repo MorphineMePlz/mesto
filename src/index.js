@@ -61,8 +61,13 @@ api
 
 const popupProfile = new PopupWithForm({
   popupSelector: classCreationSelectors.profilePopup,
-  handleSubmit: (v) => userInfo.setUserInfo(v),
+  handleSubmit: (v) =>
+    api.editUserInformation(v).then((res) => {
+      console.log(res);
+      userInfo.setUserInfo({ name: res.name, job: res.about });
+    }),
 });
+
 const popupWithFormCards = new PopupWithForm({
   popupSelector: classCreationSelectors.placePopup,
   handleSubmit: ({ place, link }) => {

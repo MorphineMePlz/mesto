@@ -1,3 +1,5 @@
+import { data } from "autoprefixer";
+
 class Api {
   constructor(setting) {
     this._address = setting.baseUrl;
@@ -22,6 +24,17 @@ class Api {
     return fetch(`${this._address}/cards`, {
       method: "GET",
       headers: this._headers,
+    }).then((res) => this.handelResponse(res));
+  }
+
+  editUserInformation({ job, name }) {
+    return fetch(`${this._address}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about: job,
+      }),
     }).then((res) => this.handelResponse(res));
   }
 }
