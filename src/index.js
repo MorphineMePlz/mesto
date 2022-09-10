@@ -52,7 +52,7 @@ const section = new Section(
 api
   .getInitialCards()
   .then((res) => {
-    res.map((element) => {
+    res.reverse().map((element) => {
       cardsArrayFromServer.push(element);
     });
     section.generateCards();
@@ -63,7 +63,6 @@ const popupProfile = new PopupWithForm({
   popupSelector: classCreationSelectors.profilePopup,
   handleSubmit: (v) =>
     api.editUserInformation(v).then((res) => {
-      console.log(res);
       userInfo.setUserInfo({ name: res.name, job: res.about });
     }),
 });
@@ -71,11 +70,10 @@ const popupProfile = new PopupWithForm({
 const popupWithFormCards = new PopupWithForm({
   popupSelector: classCreationSelectors.placePopup,
   handleSubmit: ({ place, link }) => {
-    const cardElement = createCard({
-      name: place,
-      link,
+    api.addNewCard({ place, link }).then((res) => {
+      const cardElement = createCard(res);
+      section.addItem(cardElement);
     });
-    section.addItem(cardElement);
     popupWithFormCards.close();
   },
 });

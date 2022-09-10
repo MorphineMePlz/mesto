@@ -37,6 +37,17 @@ class Api {
       }),
     }).then((res) => this.handelResponse(res));
   }
+
+  addNewCard({ place, link }) {
+    return fetch(`${this._address}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: place,
+        link,
+      }),
+    }).then((res) => this.handelResponse(res));
+  }
 }
 
 export const api = new Api({
