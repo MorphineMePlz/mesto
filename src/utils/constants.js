@@ -20,3 +20,5 @@ export const classCreationSelectors = {
 };
 
 export const ESCAPE_KEY = "Escape";
+
+export const USER_TOKEN = "ecb6ef6c-d4a1-4cc5-86ed-4ee02166ff91";

@@ -12,8 +12,6 @@ class PopupConfirm extends Popup {
   open(id) {
     super.open();
     this._cardId = id;
-    // console.log(id);
-    // console.log(this._confirmationButton);
   }
 
   setEventListeners() {

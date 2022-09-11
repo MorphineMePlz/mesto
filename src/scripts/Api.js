@@ -1,3 +1,5 @@
+import { USER_TOKEN } from "../utils/constants";
+
 class Api {
   constructor(setting) {
     this._address = setting.baseUrl;
@@ -48,7 +50,21 @@ class Api {
   }
 
   deleteOwnCard(id) {
-    return fetch(`${this._address}/${id}`, {
+    return fetch(`${this._address}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => this.handelResponse(res));
+  }
+
+  likeCard(id) {
+    return fetch(`${this._address}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then((res) => this.handelResponse(res));
+  }
+
+  removeCardLike(id) {
+    return fetch(`${this._address}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => this.handelResponse(res));
@@ -58,7 +74,7 @@ class Api {
 export const api = new Api({
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-50",
   headers: {
-    authorization: "ecb6ef6c-d4a1-4cc5-86ed-4ee02166ff91",
+    Authorization: USER_TOKEN,
     "Content-Type": "application/json",
   },
 });

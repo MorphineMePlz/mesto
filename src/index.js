@@ -6,9 +6,7 @@ import PopupWithImage from "./scripts/PopupWithImage.js";
 import PopupWithForm from "./scripts/PopupWithForm.js";
 import UserInfo from "./scripts/UserInfo.js";
 import { api } from "./scripts/Api.js";
-
 import { selectorClasses, classCreationSelectors } from "./utils/constants.js";
-
 import {
   popupProfileOpenButton,
   popupPlace,
@@ -21,7 +19,19 @@ const popupLoader = new PopupWithImage(classCreationSelectors.loaderPopup);
 
 const popupConfirm = new PopupConfirm(
   classCreationSelectors.confirmationPopup,
-  (v) => api.deleteOwnCard(v)
+  (id) => {
+    popupLoader.openLoader();
+    api
+      .deleteOwnCard(id)
+      .then(() => {
+        popupConfirm.close();
+        getCards();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        popupLoader.close();
+      });
+  }
 );
 
 const openConfirmationPopup = (id) => {
@@ -29,12 +39,19 @@ const openConfirmationPopup = (id) => {
 };
 
 const createCard = (cardData) => {
-  const card = new Card(
-    cardData,
-    selectorClasses.template,
-    (obj) => popupImage.open(obj),
-    (v) => openConfirmationPopup(v)
-  );
+  const card = new Card(cardData, selectorClasses.template, {
+    handleCardClick: (obj) => popupImage.open(obj),
+    openPopupConfirm: (id) => openConfirmationPopup(id),
+    handlePutLike: (id) =>
+      api.likeCard(id).then((res) => {
+        card.resetLikes(res.likes.length);
+      }),
+    handleDeleteLike: (id) =>
+      api.removeCardLike(id).then((res) => {
+        card.removeLike(res.likes.length);
+      }),
+  });
+
   const cardElement = card.generateCard();
 
   return cardElement;
@@ -49,6 +66,7 @@ api
   .getUserInformation()
   .then((res) => {
     userInfo.setUserInfo({ name: res.name, job: res.about });
+    localStorage.setItem("userId", res._id);
   })
   .catch((error) => console.log(error));
 
@@ -64,16 +82,21 @@ const section = new Section(
   classCreationSelectors.cardList
 );
 
-api
-  .getInitialCards()
-  .then((res) => {
-    popupLoader.close();
-    res.reverse().map((element) => {
-      cardsArrayFromServer.push(element);
-    });
-    section.generateCards();
-  })
-  .catch((error) => console.log(error));
+const getCards = () => {
+  popupLoader.openLoader();
+  api
+    .getInitialCards()
+    .then((res) => {
+      res.reverse().map((element) => {
+        cardsArrayFromServer.push(element);
+      });
+      section.generateCards();
+    })
+    .catch((error) => console.log(error))
+    .finally(() => popupLoader.close());
+};
+
+getCards();
 
 const popupProfile = new PopupWithForm({
   popupSelector: classCreationSelectors.profilePopup,
