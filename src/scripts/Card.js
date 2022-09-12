@@ -14,6 +14,7 @@ class Card {
     this._openPopupConfirm = openPopupConfirm;
     this._owner = data.owner._id;
     this._handleDeleteLike = handleDeleteLike;
+    this._data = data;
   }
 
   _getTemplate() {
@@ -47,10 +48,6 @@ class Card {
     return this._element;
   }
 
-  _removeLike(count) {
-    console.log(count);
-  }
-
   _isOwner() {
     if (this._owner === this._currentUserId) {
       return true;
@@ -63,6 +60,24 @@ class Card {
     this._element
       .querySelector(".gallery__like-button")
       .classList.toggle("gallery__like-button_active");
+  }
+
+  _handleDeliveLikeClick() {
+    this._handleDeleteLike(this._cardId);
+  }
+
+  handleCardLike() {
+    this._userLikes = this._getInitialLikes();
+    if (this._userLikes) {
+      this.removeLike(count);
+    } else {
+      this.resetLikes(count);
+    }
+  }
+
+  removeLike(count) {
+    this._likeQuantity = this._element.querySelector(".gallery__like-count");
+    this._likeQuantity.textContent = count;
   }
 
   resetLikes(count) {
@@ -78,7 +93,6 @@ class Card {
     this._userLikes = this._getInitialLikes();
     if (this._userLikes) {
       this._toggleLikeButtonState();
-      this._removeLike();
     }
   }
 
@@ -97,6 +111,7 @@ class Card {
       .querySelector(".gallery__like-button")
       .addEventListener("click", () => {
         this._handleLikeClick();
+        this._handleDeliveLikeClick();
       });
 
     this._element
