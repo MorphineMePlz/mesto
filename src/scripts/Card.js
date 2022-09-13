@@ -2,7 +2,7 @@ class Card {
   constructor(
     data,
     cardSelector,
-    { handleCardClick, openPopupConfirm, handlePutLike, handleDeleteLike }
+    { handleCardClick, openPopupConfirm, handleLikeClick }
   ) {
     this._place = data.name;
     this._link = data.link;
@@ -10,11 +10,9 @@ class Card {
     this._cardId = data._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._handlePutLike = handlePutLike;
+    this.handleLikeClick = handleLikeClick;
     this._openPopupConfirm = openPopupConfirm;
     this._owner = data.owner._id;
-    this._handleDeleteLike = handleDeleteLike;
-    this._data = data;
   }
 
   _getTemplate() {
@@ -28,6 +26,8 @@ class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
+
+    this._likeBtn = this._element.querySelector(".gallery__like-button");
     this._element.querySelector(".gallery__title").textContent = this._place;
     this._likeCount = this._element.querySelector(".gallery__like-count");
 
@@ -55,42 +55,31 @@ class Card {
     return false;
   }
 
-  _handleLikeClick() {
-    this._handlePutLike(this._cardId);
-    this._element
-      .querySelector(".gallery__like-button")
-      .classList.toggle("gallery__like-button_active");
+  _handleCardLike(evt) {
+    this.handleLikeClick(evt, this._cardId);
   }
 
-  _handleDeliveLikeClick() {
-    this._handleDeleteLike(this._cardId);
+  setLikesValue(count) {
+    this._likeCount.textContent = count;
+    this._toggleLikeButtonState();
   }
 
-  handleCardLike() {
-    this._userLikes = this._getInitialLikes();
-    if (this._userLikes) {
-      this.removeLike(count);
+  handleLikeButtonState({ isLoading }) {
+    if (isLoading) {
+      this._likeBtn.disabled = true;
+      this._likeBtn.classList.add("gallery__like-button-loading");
     } else {
-      this.resetLikes(count);
+      this._likeBtn.disabled = false;
+      this._likeBtn.classList.remove("gallery__like-button-loading");
     }
   }
 
-  removeLike(count) {
-    this._likeQuantity = this._element.querySelector(".gallery__like-count");
-    this._likeQuantity.textContent = count;
-  }
-
-  resetLikes(count) {
-    this._likeQuantity = this._element.querySelector(".gallery__like-count");
-    this._likeQuantity.textContent = count;
-  }
-
-  _getInitialLikes() {
+  _isLikedByUser() {
     return this._likes.find((ownLike) => ownLike._id === this._currentUserId);
   }
 
   _likeOwnerShow() {
-    this._userLikes = this._getInitialLikes();
+    this._userLikes = this._isLikedByUser();
     if (this._userLikes) {
       this._toggleLikeButtonState();
     }
@@ -109,9 +98,8 @@ class Card {
   _setEventListeners() {
     this._element
       .querySelector(".gallery__like-button")
-      .addEventListener("click", () => {
-        this._handleLikeClick();
-        this._handleDeliveLikeClick();
+      .addEventListener("click", (evt) => {
+        this._handleCardLike(evt);
       });
 
     this._element

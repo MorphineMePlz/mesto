@@ -69,6 +69,16 @@ class Api {
       headers: this._headers,
     }).then((res) => this.handelResponse(res));
   }
+
+  changeAvatarIcon(userAvatar) {
+    return fetch(`${this._address}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: userAvatar,
+      }),
+    }).then((res) => this.handelResponse(res));
+  }
 }
 
 export const api = new Api({

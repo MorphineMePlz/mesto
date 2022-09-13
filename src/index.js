@@ -42,19 +42,32 @@ const createCard = (cardData) => {
   const card = new Card(cardData, selectorClasses.template, {
     handleCardClick: (obj) => popupImage.open(obj),
     openPopupConfirm: (id) => openConfirmationPopup(id),
-    handlePutLike: (id) =>
-      api.likeCard(id).then((res) => {
-        card.resetLikes(res.likes.length);
-      }),
-    handleDeleteLike: (id) =>
-      api.removeCardLike(id).then((res) => {
-        card.removeLike(res.likes.length);
-      }),
+    handleLikeClick: (evt, id) => handleLike(evt, id, card),
   });
 
   const cardElement = card.generateCard();
 
   return cardElement;
+};
+
+const handleLike = (evt, id, card) => {
+  const isCardLiked = evt.target.classList.contains(
+    "gallery__like-button_active"
+  );
+
+  card.handleLikeButtonState({ isLoadig: true });
+
+  if (isCardLiked) {
+    api.removeCardLike(id).then((res) => {
+      card.setLikesValue(res.likes.length);
+      card.handleLikeButtonState({ isLoadig: false });
+    });
+  } else {
+    api.likeCard(id).then((res) => {
+      card.setLikesValue(res.likes.length);
+      card.handleLikeButtonState({ isLoadig: false });
+    });
+  }
 };
 
 const userInfo = new UserInfo({
