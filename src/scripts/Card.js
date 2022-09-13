@@ -27,7 +27,7 @@ class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._likeBtn = this._element.querySelector(".gallery__like-button");
+    this._likeButton = this._element.querySelector(".gallery__like-button");
     this._element.querySelector(".gallery__title").textContent = this._place;
     this._likeCount = this._element.querySelector(".gallery__like-count");
 
@@ -66,11 +66,11 @@ class Card {
 
   handleLikeButtonState({ isLoading }) {
     if (isLoading) {
-      this._likeBtn.disabled = true;
-      this._likeBtn.classList.add("gallery__like-button-loading");
+      this._likeButton.disabled = true;
+      this._likeButton.classList.add("gallery__like-button-loading");
     } else {
-      this._likeBtn.disabled = false;
-      this._likeBtn.classList.remove("gallery__like-button-loading");
+      this._likeButton.disabled = false;
+      this._likeButton.classList.remove("gallery__like-button-loading");
     }
   }
 

@@ -20,6 +20,10 @@
                 alt="Жак-Ив Кусто"
                 class="profile__image"
               />
+              <button
+                type="button"
+                class="profile__edit-button_avatar"
+              ></button>
             </div>
             <div class="profile__info-container">
               <div class="profile__box">
@@ -123,6 +127,28 @@
         <div class="popup__image-container">
           <img src="#" alt="#" class="popup__image-place" />
           <p class="popup__image-title"></p>
+          <button type="button" class="popup__close-button"></button>
+        </div>
+      </div>
+
+      <div class="popup popup_change-avatar">
+        <div class="popup__container">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form name="changeAvatar" class="popup__form" novalidate>
+            <label class="popup__field">
+              <input
+                class="popup__input popup__input_type_link"
+                placeholder="Ссылка на картинку"
+                required
+                type="url"
+                name="link-avatar"
+              />
+              <span class="popup__error" id="link-avatar-error"></span>
+            </label>
+            <button type="submit" class="popup__submit-button" disabled>
+              Сохранить
+            </button>
+          </form>
           <button type="button" class="popup__close-button"></button>
         </div>
       </div>

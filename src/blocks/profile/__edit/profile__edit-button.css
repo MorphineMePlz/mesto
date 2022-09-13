@@ -18,6 +18,22 @@
   cursor: pointer;
 }
 
+.profile__edit-button_avatar {
+  background-image: url(../../../images/icons/edit.svg);
+  position: absolute;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  background-position: center;
+  background-size: 26px 26px;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: none;
+  display: none;
+}
+
 @media screen and (max-width: 320px) {
   .profile__edit-button {
     width: 18px;
