@@ -20,5 +20,5 @@ export const placePopupOpenButton = document.querySelector(
   ".profile__plus-button"
 );
 export const openButtonChangeAvatar = document.querySelector(
-  ".profile__edit-button_avatar"
+  ".profile__edit-button-avatar"
 );

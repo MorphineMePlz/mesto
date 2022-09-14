@@ -1,16 +1,16 @@
-import "./pages/index.css";
+import "./index.css";
 
-import Card from "./scripts/Card.js";
-import FormValidator from "./scripts/FormValidator.js";
-import Section from "./scripts/Section.js";
-import PopupWithImage from "./scripts/PopupWithImage.js";
-import PopupWithForm from "./scripts/PopupWithForm.js";
-import UserInfo from "./scripts/UserInfo.js";
-import PopupConfirm from "./scripts/PopupConfirm";
+import Card from "../scripts/Card.js";
+import FormValidator from "../scripts/FormValidator.js";
+import Section from "../scripts/Section.js";
+import PopupWithImage from "../scripts/PopupWithImage.js";
+import PopupWithForm from "../scripts/PopupWithForm.js";
+import UserInfo from "../scripts/UserInfo.js";
+import PopupConfirm from "../scripts/PopupConfirm";
 
-import { api } from "./scripts/Api.js";
+import { api } from "../scripts/Api.js";
 
-import { selectorClasses, classCreationSelectors } from "./utils/constants.js";
+import { selectorClasses, classCreationSelectors } from "../utils/constants.js";
 import {
   popupProfileOpenButton,
   popupPlace,
@@ -18,7 +18,7 @@ import {
   profilePopup,
   placePopupOpenButton,
   openButtonChangeAvatar,
-} from "./utils/domElements.js";
+} from "../utils/domElements.js";
 
 const popupLoader = new PopupWithImage(classCreationSelectors.loaderPopup);
 

@@ -1,4 +1,4 @@
-.popup__submit-button {
+.popup__submit-button_confirmation {
   color: white;
   font-size: 18px;
   line-height: 22px;
@@ -10,10 +10,11 @@
   border-radius: 2px;
   border: none;
   outline: none;
-  margin-top: 18px;
+  margin: 0 auto 36px auto;
+  padding: 0;
 }
 
-.popup__submit-button:hover {
+.popup__submit-button_confirmation:hover {
   opacity: 0.8;
   cursor: pointer;
 }
