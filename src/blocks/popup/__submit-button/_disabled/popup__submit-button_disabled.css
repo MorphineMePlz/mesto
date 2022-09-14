@@ -10,6 +10,18 @@
   cursor: not-allowed;
 }
 
+.popup__submit-button_loading {
+  background-image: url(../../../../images/loader.svg);
+  background-position: 15% 50%;
+  background-repeat: no-repeat;
+  background-size: 15%;
+}
+
+.popup__submit-button_loading:hover {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
 @media screen and (max-width: 568px) {
   .popup__submit-button_disabled {
     width: 238px;

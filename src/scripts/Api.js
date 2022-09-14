@@ -1,4 +1,4 @@
-import { USER_TOKEN } from "../utils/constants";
+import { USER_TOKEN, BASE_URL } from "../utils/constants";
 
 class Api {
   constructor(setting) {
@@ -70,19 +70,19 @@ class Api {
     }).then((res) => this.handelResponse(res));
   }
 
-  changeAvatarIcon(userAvatar) {
+  changeAvatar(avatar) {
     return fetch(`${this._address}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: userAvatar,
+        avatar,
       }),
     }).then((res) => this.handelResponse(res));
   }
 }
 
 export const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-50",
+  baseUrl: BASE_URL,
   headers: {
     Authorization: USER_TOKEN,
     "Content-Type": "application/json",

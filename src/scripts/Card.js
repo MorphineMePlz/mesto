@@ -25,11 +25,11 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._setEventListeners();
 
     this._likeButton = this._element.querySelector(".gallery__like-button");
     this._element.querySelector(".gallery__title").textContent = this._place;
     this._likeCount = this._element.querySelector(".gallery__like-count");
+    this._deleteButton = this._element.querySelector(".gallery__delete-button");
 
     this._image = this._element.querySelector(".gallery__image");
     this._image.src = this._link;
@@ -41,10 +41,9 @@ class Card {
     this._likeOwnerShow();
 
     if (!this._isOwner()) {
-      this._element
-        .querySelector(".gallery__delete-button")
-        .classList.add("gallery__delete-button_hidden");
+      this._deleteButton.classList.add("gallery__delete-button_hidden");
     }
+    this._setEventListeners();
     return this._element;
   }
 
@@ -86,33 +85,25 @@ class Card {
   }
 
   _toggleLikeButtonState() {
-    this._element
-      .querySelector(".gallery__like-button")
-      .classList.toggle("gallery__like-button_active");
+    this._likeButton.classList.toggle("gallery__like-button_active");
   }
 
   _handleDeleteCard() {
-    this._openPopupConfirm(this._cardId);
+    this._openPopupConfirm(this._cardId, this._element);
   }
 
   _setEventListeners() {
-    this._element
-      .querySelector(".gallery__like-button")
-      .addEventListener("click", (evt) => {
-        this._handleCardLike(evt);
-      });
+    this._likeButton.addEventListener("click", (evt) => {
+      this._handleCardLike(evt);
+    });
 
-    this._element
-      .querySelector(".gallery__delete-button")
-      .addEventListener("click", () => {
-        this._handleDeleteCard();
-      });
+    this._deleteButton.addEventListener("click", () => {
+      this._handleDeleteCard();
+    });
 
-    this._element
-      .querySelector(".gallery__image")
-      .addEventListener("click", () => {
-        this._handleCardClick({ place: this._place, link: this._link });
-      });
+    this._image.addEventListener("click", () => {
+      this._handleCardClick({ place: this._place, link: this._link });
+    });
   }
 }
 

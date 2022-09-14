@@ -11,14 +11,18 @@ export const selectorClasses = {
 export const classCreationSelectors = {
   userName: ".profile__title",
   userJob: ".profile__profession",
+  userAvatar: ".profile__image",
   profilePopup: ".popup_profile",
   placePopup: ".popup_new-place",
   imagePopup: ".popup_image",
   confirmationPopup: ".popup_confirmation",
   loaderPopup: ".popup_loader",
   cardList: ".gallery__list",
+  popupAvatar: ".popup_change-avatar",
 };
 
 export const ESCAPE_KEY = "Escape";
 
 export const USER_TOKEN = "ecb6ef6c-d4a1-4cc5-86ed-4ee02166ff91";
+
+export const BASE_URL = "https://mesto.nomoreparties.co/v1/cohort-50";
