@@ -1,4 +1,4 @@
-# Домашняя работа № 8: Место
+# Домашняя работа № 9: Место
 
 ## Обзор
 
@@ -13,7 +13,8 @@
 4. Методолгия - БЭМ
 5. Базовый JavaScript
 6. WebPack
-7. [Ссылка на сайт](https://morphinemeplz.github.io/mesto/)
+7. Api методы
+8. [Ссылка на сайт](https://morphinemeplz.github.io/mesto/)
 
 ## 2. Figma
 
