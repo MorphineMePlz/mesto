@@ -7,7 +7,7 @@
   position: relative;
 }
 
-.profile__image-container:hover .profile__edit-button_avatar {
+.profile__image-container:hover .profile__edit-button-avatar {
   display: block;
   cursor: pointer;
 }
