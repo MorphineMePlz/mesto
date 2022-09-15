@@ -13,6 +13,7 @@ class Card {
     this.handleLikeClick = handleLikeClick;
     this._openPopupConfirm = openPopupConfirm;
     this._owner = data.owner._id;
+    this._data = data;
   }
 
   _getTemplate() {
@@ -35,14 +36,13 @@ class Card {
     this._image.src = this._link;
     this._image.alt = this._place;
 
-    this._likeCount.textContent = this._likes.length;
     this._currentUserId = localStorage.getItem("userId");
-
-    this._likeOwnerShow();
+    this.setLikesValue({ likes: this._likes });
 
     if (!this._isOwner()) {
       this._deleteButton.classList.add("gallery__delete-button_hidden");
     }
+
     this._setEventListeners();
     return this._element;
   }
@@ -51,16 +51,13 @@ class Card {
     if (this._owner === this._currentUserId) {
       return true;
     }
+
     return false;
   }
 
-  _handleCardLike(evt) {
-    this.handleLikeClick(evt, this._cardId);
-  }
-
-  setLikesValue(count) {
-    this._likeCount.textContent = count;
-    this._toggleLikeButtonState();
+  removeCard() {
+    this._element.remove();
+    this._element = null;
   }
 
   handleLikeButtonState({ isLoading }) {
@@ -73,19 +70,26 @@ class Card {
     }
   }
 
-  _isLikedByUser() {
-    return this._likes.find((ownLike) => ownLike._id === this._currentUserId);
+  _handleCardLike(evt) {
+    this.handleLikeClick(evt, this._data);
   }
 
-  _likeOwnerShow() {
-    this._userLikes = this._isLikedByUser();
-    if (this._userLikes) {
-      this._toggleLikeButtonState();
+  setLikesValue({ likes }) {
+    this._isLiked = this.isLikedByUser(likes);
+
+    if (this._isLiked) {
+      this._likeButton.classList.add("gallery__like-button_active");
+    } else {
+      this._likeButton.classList.remove("gallery__like-button_active");
     }
+
+    this._likeCount.textContent = likes.length;
   }
 
-  _toggleLikeButtonState() {
-    this._likeButton.classList.toggle("gallery__like-button_active");
+  isLikedByUser(likesArray) {
+    return Boolean(
+      likesArray.find((ownLike) => ownLike._id === this._currentUserId)
+    );
   }
 
   _handleDeleteCard() {

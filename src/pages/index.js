@@ -1,14 +1,14 @@
 import "./index.css";
 
-import Card from "../scripts/Card.js";
-import FormValidator from "../scripts/FormValidator.js";
-import Section from "../scripts/Section.js";
-import PopupWithImage from "../scripts/PopupWithImage.js";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import UserInfo from "../scripts/UserInfo.js";
-import PopupConfirm from "../scripts/PopupConfirm";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import PopupConfirm from "../components/PopupConfirm";
 
-import { api } from "../scripts/Api.js";
+import { api } from "../components/Api.js";
 
 import { selectorClasses, classCreationSelectors } from "../utils/constants.js";
 import {
@@ -22,32 +22,29 @@ import {
 
 const popupLoader = new PopupWithImage(classCreationSelectors.loaderPopup);
 
-const popupConfirm = new PopupConfirm(
-  classCreationSelectors.confirmationPopup,
-  (id, card) => {
+const popupConfirm = new PopupConfirm(classCreationSelectors.confirmationPopup);
+
+const handleDeleteCard = (id, cardElement) => {
+  popupConfirm.open();
+  popupConfirm.setSubmitCallback(() => {
     api
       .deleteOwnCard(id)
       .then(() => {
         popupLoader.openLoader();
-        card.remove();
+        cardElement.removeCard();
         popupConfirm.close();
       })
       .catch((error) => console.log(error))
       .finally(() => {
         popupLoader.close();
       });
-  }
-);
-
-const openConfirmationPopup = (id, cardElement) => {
-  popupConfirm.open(id, cardElement);
+  });
 };
 
 const createCard = (cardData) => {
   const card = new Card(cardData, selectorClasses.template, {
     handleCardClick: (obj) => popupImage.open(obj),
-    openPopupConfirm: (id, cardElement) =>
-      openConfirmationPopup(id, cardElement),
+    openPopupConfirm: (id) => handleDeleteCard(id, card),
     handleLikeClick: (evt, id) => handleLike(evt, id, card),
   });
 
@@ -56,7 +53,9 @@ const createCard = (cardData) => {
   return cardElement;
 };
 
-const handleLike = (evt, id, card) => {
+const handleLike = (evt, { likes, _id }, card) => {
+  console.log(card.isLikedByUser(likes));
+
   const isCardLiked = evt.target.classList.contains(
     "gallery__like-button_active"
   );
@@ -65,17 +64,18 @@ const handleLike = (evt, id, card) => {
 
   if (isCardLiked) {
     api
-      .removeCardLike(id)
+      .removeCardLike(_id)
       .then((res) => {
-        card.setLikesValue(res.likes.length);
+        console.log(res);
+        card.setLikesValue(res);
         card.handleLikeButtonState({ isLoadig: false });
       })
       .catch((error) => console.log(error));
   } else {
     api
-      .likeCard(id)
+      .likeCard(_id)
       .then((res) => {
-        card.setLikesValue(res.likes.length);
+        card.setLikesValue(res);
         card.handleLikeButtonState({ isLoadig: false });
       })
       .catch((error) => console.log(error));
@@ -98,7 +98,7 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
     });
     localStorage.setItem("userId", userData._id);
 
-    initialCards.reverse().map((element) => {
+    initialCards.map((element) => {
       cardsArrayFromServer.push(element);
     });
     section.generateCards();
@@ -121,9 +121,9 @@ const section = new Section(
 
 const popupProfile = new PopupWithForm({
   popupSelector: classCreationSelectors.profilePopup,
-  handleSubmit: (v) =>
+  handleSubmit: (data) =>
     api
-      .editUserInformation(v)
+      .editUserInformation(data)
       .then((res) => {
         userInfo.setUserInfo({
           name: res.name,
