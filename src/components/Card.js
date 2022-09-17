@@ -8,12 +8,12 @@ class Card {
     this._link = data.link;
     this._likes = data.likes;
     this._cardId = data._id;
+    this._owner = data.owner._id;
+
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this.handleLikeClick = handleLikeClick;
     this._openPopupConfirm = openPopupConfirm;
-    this._owner = data.owner._id;
-    this._data = data;
   }
 
   _getTemplate() {
@@ -48,11 +48,7 @@ class Card {
   }
 
   _isOwner() {
-    if (this._owner === this._currentUserId) {
-      return true;
-    }
-
-    return false;
+    return this._owner === this._currentUserId;
   }
 
   removeCard() {
@@ -71,7 +67,7 @@ class Card {
   }
 
   _handleCardLike(evt) {
-    this.handleLikeClick(evt, this._data);
+    this.handleLikeClick(evt, { likes: this._likes, id: this._cardId });
   }
 
   setLikesValue({ likes }) {
@@ -84,12 +80,11 @@ class Card {
     }
 
     this._likeCount.textContent = likes.length;
+    this._likes = likes;
   }
 
   isLikedByUser(likesArray) {
-    return Boolean(
-      likesArray.find((ownLike) => ownLike._id === this._currentUserId)
-    );
+    return likesArray.some((ownLike) => ownLike._id === this._currentUserId);
   }
 
   _handleDeleteCard() {

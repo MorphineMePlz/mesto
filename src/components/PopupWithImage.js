@@ -7,10 +7,6 @@ class PopupWithImage extends Popup {
     this._titleElement = this._popup.querySelector(".popup__image-title");
   }
 
-  openLoader() {
-    super.open();
-  }
-
   open({ place, link }) {
     this._imageElement.src = link;
     this._imageElement.alt = place;

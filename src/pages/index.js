@@ -1,6 +1,7 @@
 import "./index.css";
 
 import Card from "../components/Card.js";
+import Popup from "../components/Popup";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -20,17 +21,18 @@ import {
   openButtonChangeAvatar,
 } from "../utils/domElements.js";
 
-const popupLoader = new PopupWithImage(classCreationSelectors.loaderPopup);
-
+const popupLoader = new Popup(classCreationSelectors.loaderPopup);
 const popupConfirm = new PopupConfirm(classCreationSelectors.confirmationPopup);
+
+const cardsArrayFromServer = [];
 
 const handleDeleteCard = (id, cardElement) => {
   popupConfirm.open();
   popupConfirm.setSubmitCallback(() => {
+    popupLoader.open();
     api
       .deleteOwnCard(id)
       .then(() => {
-        popupLoader.openLoader();
         cardElement.removeCard();
         popupConfirm.close();
       })
@@ -53,33 +55,17 @@ const createCard = (cardData) => {
   return cardElement;
 };
 
-const handleLike = (evt, { likes, _id }, card) => {
-  console.log(card.isLikedByUser(likes));
-
-  const isCardLiked = evt.target.classList.contains(
-    "gallery__like-button_active"
-  );
-
+const handleLike = (_, { likes, id }, card) => {
+  const isCardLiked = card.isLikedByUser(likes);
   card.handleLikeButtonState({ isLoadig: true });
+  const action = isCardLiked ? api.removeCardLike(id) : api.likeCard(id);
 
-  if (isCardLiked) {
-    api
-      .removeCardLike(_id)
-      .then((res) => {
-        console.log(res);
-        card.setLikesValue(res);
-        card.handleLikeButtonState({ isLoadig: false });
-      })
-      .catch((error) => console.log(error));
-  } else {
-    api
-      .likeCard(_id)
-      .then((res) => {
-        card.setLikesValue(res);
-        card.handleLikeButtonState({ isLoadig: false });
-      })
-      .catch((error) => console.log(error));
-  }
+  action
+    .then((res) => {
+      card.setLikesValue(res);
+      card.handleLikeButtonState({ isLoadig: false });
+    })
+    .catch((error) => console.log(error));
 };
 
 const userInfo = new UserInfo({
@@ -101,19 +87,17 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
     initialCards.map((element) => {
       cardsArrayFromServer.push(element);
     });
-    section.generateCards();
+    section.generateCards(cardsArrayFromServer);
   })
   .catch((error) => {
     console.log(error);
   });
 
-const cardsArrayFromServer = [];
 const section = new Section(
   {
-    items: cardsArrayFromServer,
     renderer: (item) => {
       const cardElement = createCard(item);
-      section.addItem(cardElement);
+      section.addItems(cardElement);
     },
   },
   classCreationSelectors.cardList
@@ -121,9 +105,9 @@ const section = new Section(
 
 const popupProfile = new PopupWithForm({
   popupSelector: classCreationSelectors.profilePopup,
-  handleSubmit: (data) =>
+  handleSubmit: (values) =>
     api
-      .editUserInformation(data)
+      .editUserInformation(values)
       .then((res) => {
         userInfo.setUserInfo({
           name: res.name,
@@ -172,7 +156,6 @@ popupProfile.setEventListeners();
 popupWithFormCards.setEventListeners();
 popupConfirm.setEventListeners();
 popupAvatar.setEventListeners();
-section.generateCards();
 
 const formProfileCheckValid = new FormValidator(selectorClasses, profilePopup);
 formProfileCheckValid.enableValidation();
