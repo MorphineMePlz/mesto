@@ -61,5 +61,5 @@
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css);
 @import url(../blocks/popup/__confirmation-title/popup__confirmation-title.css);
-@import url(../blocks/popup/__submit-button/_confirmation/popup__submit-button_confirmation.css);
 @import url(../blocks/popup/__submit-button/_loading/popup__submit-button_loading.css);
+@import url(../blocks/popup/__submit-button/_confirm/popup__submit-button_confirm.css);
