@@ -24,8 +24,6 @@ import {
 const popupLoader = new Popup(classCreationSelectors.loaderPopup);
 const popupConfirm = new PopupConfirm(classCreationSelectors.confirmationPopup);
 
-const cardsArrayFromServer = [];
-
 const handleDeleteCard = (id, cardElement) => {
   popupConfirm.open();
   popupConfirm.setSubmitCallback(() => {
@@ -55,14 +53,14 @@ const createCard = (cardData) => {
   return cardElement;
 };
 
-const handleLike = (_, { likes, id }, card) => {
-  const isCardLiked = card.isLikedByUser(likes);
+const handleLike = (_, id, card) => {
+  const isCardLiked = card.isLikedByUser();
   card.handleLikeButtonState({ isLoadig: true });
   const action = isCardLiked ? api.removeCardLike(id) : api.likeCard(id);
 
   action
     .then((res) => {
-      card.setLikesValue(res);
+      card.setLikesValue(res.likes);
       card.handleLikeButtonState({ isLoadig: false });
     })
     .catch((error) => console.log(error));
@@ -82,12 +80,9 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
       job: userData.about,
       avatar: userData.avatar,
     });
-    localStorage.setItem("userId", userData._id);
 
-    initialCards.map((element) => {
-      cardsArrayFromServer.push(element);
-    });
-    section.generateCards(cardsArrayFromServer);
+    localStorage.setItem("userId", userData._id);
+    section.generateCards(initialCards);
   })
   .catch((error) => {
     console.log(error);

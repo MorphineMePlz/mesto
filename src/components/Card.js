@@ -37,7 +37,7 @@ class Card {
     this._image.alt = this._place;
 
     this._currentUserId = localStorage.getItem("userId");
-    this.setLikesValue({ likes: this._likes });
+    this._updateLikeState();
 
     if (!this._isOwner()) {
       this._deleteButton.classList.add("gallery__delete-button_hidden");
@@ -67,24 +67,27 @@ class Card {
   }
 
   _handleCardLike(evt) {
-    this.handleLikeClick(evt, { likes: this._likes, id: this._cardId });
+    this.handleLikeClick(evt, this._cardId);
   }
 
-  setLikesValue({ likes }) {
-    this._isLiked = this.isLikedByUser(likes);
+  isLikedByUser() {
+    return this._likes.some((ownLike) => ownLike._id === this._currentUserId);
+  }
+
+  _updateLikeState() {
+    this._isLiked = this.isLikedByUser();
+    this._likeCount.textContent = this._likes.length;
 
     if (this._isLiked) {
       this._likeButton.classList.add("gallery__like-button_active");
     } else {
       this._likeButton.classList.remove("gallery__like-button_active");
     }
-
-    this._likeCount.textContent = likes.length;
-    this._likes = likes;
   }
 
-  isLikedByUser(likesArray) {
-    return likesArray.some((ownLike) => ownLike._id === this._currentUserId);
+  setLikesValue(likes) {
+    this._likes = likes;
+    this._updateLikeState();
   }
 
   _handleDeleteCard() {
